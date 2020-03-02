@@ -10,7 +10,7 @@ const ProductCard = ({
   retail_price_cents = 0,
 }) => {
   return (
-    <Card key={id} style={{ width: "18rem", float: "left" }}>
+    <Card style={{ width: "18rem", float: "left" }}>
       <Card.Img variant="top" src={photo_url + (id % 16)} />
       <Card.Body>
         <Card.Title>{name}</Card.Title>

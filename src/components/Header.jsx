@@ -17,19 +17,19 @@ const Header = ({ department, setDepartment }) => {
         <Form inline>
           <Button
             active={department === "mens"}
-            onClick={onClickDepartment("mens")}
+            onClick={() => onClickDepartment("mens")}
           >
             Men's
           </Button>
           <Button
             active={department === "womens"}
-            onClick={onClickDepartment("womens")}
+            onClick={() => onClickDepartment("womens")}
           >
             Women's
           </Button>
           <Button
             active={department === "kids"}
-            onClick={onClickDepartment("kids")}
+            onClick={() => onClickDepartment("kids")}
           >
             Kid's
           </Button>

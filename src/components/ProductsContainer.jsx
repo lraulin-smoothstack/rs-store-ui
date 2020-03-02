@@ -13,6 +13,7 @@ const ProductsContainer = ({ department, products }) => {
       {products.map(x => (
         <ProductCard
           id={x.id}
+          key={x.id}
           name={x.name}
           description={x.description}
           department={x.department}
