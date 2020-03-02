@@ -7,7 +7,7 @@ const receiveProducts = products => ({
 });
 
 export const getAllProducts = () => dispatch => {
-  shop.getProducts(products => {
+  shop.getProducts().then(products => {
     dispatch(receiveProducts(products));
   });
 };
@@ -18,7 +18,7 @@ const addToCartUnsafe = productId => ({
 });
 
 export const addToCart = productId => (dispatch, getState) => {
-  if (getState().products.byId[productId].inventory > 0) {
+  if (getState().products.byId[productId].stock > 0) {
     dispatch(addToCartUnsafe(productId));
   }
 };
