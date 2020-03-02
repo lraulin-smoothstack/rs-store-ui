@@ -10,6 +10,7 @@ dependencies:
   react-bootstrap: 1.0.0-beta.17_react-dom@16.13.0+react@16.13.0
   react-dom: 16.13.0_react@16.13.0
   react-scripts: 3.4.0
+  redux: 4.0.5
 lockfileVersion: 5.1
 packages:
   /@babel/code-frame/7.8.3:
@@ -9204,6 +9205,13 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-6tDA8g98We0zd0GvVeMT9arEOnTw9qM03L9cJXaCjrip1OO764RDBLBfrB4cwzNGDj5OA5ioymC9GkizgWJDUg==
+  /redux/4.0.5:
+    dependencies:
+      loose-envify: 1.4.0
+      symbol-observable: 1.2.0
+    dev: false
+    resolution:
+      integrity: sha512-VSz1uMAH24DM6MF72vcojpYPtrTUu3ByVWfPL1nPfVRb5mZVTve5GnNCUV53QM/BZ66xfWrm0CTWoM+Xlz8V1w==
   /regenerate-unicode-properties/8.1.0:
     dependencies:
       regenerate: 1.4.0
@@ -10332,6 +10340,12 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-yhy/sQYxR5BkC98CY7o31VGsg014AKLEPxdfhora76l36hD9Rdy5NZA/Ocn6yayNPgSamYdtX2rFJdcv07AYVw==
+  /symbol-observable/1.2.0:
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha512-e900nM8RRtGhlV36KGEU9k65K3mPb1WV70OdjfxlG2EAuM1noi/E/BaW/uMhL7bPEssK8QV57vN3esixjUvcXQ==
   /symbol-tree/3.2.4:
     dev: false
     resolution:
@@ -11359,3 +11373,4 @@ specifiers:
   react-bootstrap: ^1.0.0-beta.17
   react-dom: ^16.13.0
   react-scripts: 3.4.0
+  redux: ^4.0.5

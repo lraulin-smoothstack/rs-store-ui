@@ -2,18 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Header from "./Header";
 import ProductsContainer from "./ProductsContainer";
+import { getProducts } from "../api";
 
 const App = () => {
   const [department, setDepartment] = useState(null);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch("https://0ogofj3z44.execute-api.us-east-1.amazonaws.com/dev/products")
-      .then(result => result.json())
-      .then(data => {
-        setProducts(data);
-      })
-      .catch(e => console.log(e));
+    getProducts().then(data => setProducts(data));
   }, []);
 
   return (
