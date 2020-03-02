@@ -1,5 +1,7 @@
 import React from "react";
 import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 
 const Header = ({ department, setDepartment }) => {
   const onClickDepartment = department => {
@@ -35,6 +37,9 @@ const Header = ({ department, setDepartment }) => {
           </Button>
           <FormControl type="text" placeholder="Search" className="mr-sm-2" />
           <Button variant="outline-light">Search</Button>
+          <Button>
+            <FontAwesomeIcon icon={faShoppingCart} />
+          </Button>
         </Form>
       </Navbar>
     </>
