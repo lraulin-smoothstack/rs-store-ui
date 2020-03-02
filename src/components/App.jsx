@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
 import Header from "./Header";
 import ProductsContainer from "./ProductsContainer";
 import { getProducts } from "../api";

@@ -1,12 +1,25 @@
-import React from "react";
-import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import {
+  Navbar,
+  Nav,
+  Form,
+  FormControl,
+  Button,
+  Dropdown,
+  DropdownButton,
+} from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import FilterContainer from "../containers/FilterContainer";
 
-const Header = ({ department, setDepartment }) => {
-  const onClickDepartment = department => {
+const Header = props => {
+  const [department, setDepartment] = useState(null);
+
+  const onSelectDepartment = department => {
+    console.log("DEPARTMENT SELECTED: " + department);
     setDepartment(department);
   };
+
   return (
     <>
       <Navbar bg="primary" variant="dark">
@@ -16,31 +29,10 @@ const Header = ({ department, setDepartment }) => {
           <Nav.Link href="#features">Features</Nav.Link>
           <Nav.Link href="#pricing">Pricing</Nav.Link>
         </Nav>
-        <Form inline>
-          <Button
-            active={department === "mens"}
-            onClick={() => onClickDepartment("mens")}
-          >
-            Men's
-          </Button>
-          <Button
-            active={department === "womens"}
-            onClick={() => onClickDepartment("womens")}
-          >
-            Women's
-          </Button>
-          <Button
-            active={department === "kids"}
-            onClick={() => onClickDepartment("kids")}
-          >
-            Kid's
-          </Button>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="outline-light">Search</Button>
-          <Button>
-            <FontAwesomeIcon icon={faShoppingCart} />
-          </Button>
-        </Form>
+        <FilterContainer />
+        <Button>
+          <FontAwesomeIcon icon={faShoppingCart} />
+        </Button>
       </Navbar>
     </>
   );

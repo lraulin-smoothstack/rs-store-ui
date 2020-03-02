@@ -10,7 +10,7 @@ const Product = ({
   photo_url = "http://placekitten.com/200/300?image=",
   retail_price_cents = 0,
 }) => (
-  <Card style={{ width: "18rem", float: "left" }}>
+  <Card>
     <Card.Img variant="top" src={photo_url + (id % 16)} />
     <Card.Body>
       <Card.Title>{name}</Card.Title>
@@ -19,7 +19,6 @@ const Product = ({
         {description}
         <br />${retail_price_cents / 100}
       </Card.Text>
-      <Button variant="primary">Add to Cart</Button>
     </Card.Body>
   </Card>
 );

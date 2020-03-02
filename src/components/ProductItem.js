@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Product from "./Product";
 
 const ProductItem = ({ product, onAddToCartClicked }) => (
-  <div style={{ marginBottom: 20 }}>
+  <div style={{ marginBottom: 20, width: "18rem", float: "left" }}>
     <Product
       name={product.name}
       retail_price_cents={product.retail_price_cents}

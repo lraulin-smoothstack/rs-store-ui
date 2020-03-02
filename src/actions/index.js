@@ -38,3 +38,8 @@ export const checkout = products => (dispatch, getState) => {
     // dispatch({ type: types.CHECKOUT_FAILURE, cart })
   });
 };
+
+export const setDepartment = department => ({
+  type: types.UPDATE_FILTER,
+  department,
+});
