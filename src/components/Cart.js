@@ -1,16 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Product from "./Product";
+import CartItem from "./CartItem";
 
 const Cart = ({ products, total, onCheckoutClicked }) => {
   const hasProducts = products.length > 0;
   const nodes = hasProducts ? (
     products.map(product => (
-      <Product
+      <CartItem
         id={product.id}
         name={product.name}
         retail_price_cents={product.retail_price_cents}
-        stock={product.stock}
         key={product.id}
       />
     ))
