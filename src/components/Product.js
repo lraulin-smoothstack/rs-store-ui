@@ -18,7 +18,7 @@ const Product = ({
         <strong>{department}</strong>
         <br />
         {description}
-        <br />${retail_price_cents / 100}
+        <br />${(retail_price_cents / 100).toFixed(2)}
       </Card.Text>
     </Card.Body>
   </Card>
