@@ -4,9 +4,9 @@ import { Card, Button } from "react-bootstrap";
 
 const Product = ({
   id = 0,
-  name = "Product Name",
-  description = "Lorem ipsum",
-  department = "Men's",
+  name = "[Product Name]",
+  description = "[Description]",
+  department = "[Department Name]",
   photo_url = "http://placekitten.com/200/300?image=",
   retail_price_cents = 0,
 }) => (
@@ -15,7 +15,8 @@ const Product = ({
     <Card.Body>
       <Card.Title>{name}</Card.Title>
       <Card.Text>
-        <em>{department}</em>
+        <strong>{department}</strong>
+        <br />
         {description}
         <br />${retail_price_cents / 100}
       </Card.Text>

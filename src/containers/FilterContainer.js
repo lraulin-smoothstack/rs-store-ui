@@ -11,12 +11,16 @@ import {
 } from "react-bootstrap";
 import { connect } from "react-redux";
 import { setDepartment } from "../actions";
-import { getDepartment, getSearchString } from "../reducers/filter";
+import { getDepartment } from "../reducers";
 
-const FilterContainer = ({ department, searchString }) => {
-  const departmentTitle = { mens: "Men's", womens: "Women's", kids: "Kid's" };
-  const setDepartment = department => {
-    //
+const FilterContainer = ({ department, searchString, dispatch }) => {
+  const MEN = "Men";
+  const WOMEN = "Women";
+  const KIDS = "Kids";
+  const departmentTitle = { Men: "Men's", Women: "Women's", Kids: "Kids'" };
+  const onSelectDepartment = department => {
+    console.log("onSelectDepartment");
+    setDepartment(department)(dispatch);
   };
 
   return (
@@ -25,17 +29,17 @@ const FilterContainer = ({ department, searchString }) => {
         id="dropdown-item-button"
         title={department ? departmentTitle[department] : "All Departments"}
       >
-        <Dropdown.Item as="button" onSelect={() => setDepartment(null)}>
+        <Dropdown.Item as="button" onSelect={() => onSelectDepartment(null)}>
           All Departments
         </Dropdown.Item>
-        <Dropdown.Item as="button" onSelect={() => setDepartment("mens")}>
-          {departmentTitle["mens"]}
+        <Dropdown.Item as="button" onSelect={() => onSelectDepartment(MEN)}>
+          {departmentTitle[MEN]}
         </Dropdown.Item>
-        <Dropdown.Item as="button" onSelect={() => setDepartment("womens")}>
-          {departmentTitle["womens"]}
+        <Dropdown.Item as="button" onSelect={() => onSelectDepartment(WOMEN)}>
+          {departmentTitle[WOMEN]}
         </Dropdown.Item>
-        <Dropdown.Item as="button" onSelect={() => setDepartment("kids")}>
-          {departmentTitle["kids"]}
+        <Dropdown.Item as="button" onSelect={() => onSelectDepartment(KIDS)}>
+          {departmentTitle[KIDS]}
         </Dropdown.Item>
       </DropdownButton>
       <Form inline>
@@ -80,7 +84,6 @@ const FilterContainer = ({ department, searchString }) => {
 
 const mapStateToProps = state => ({
   department: getDepartment(state),
-  searchString: getSearchString(state),
 });
 
-export default connect(mapStateToProps, { setDepartment })(FilterContainer);
+export default connect(mapStateToProps)(FilterContainer);

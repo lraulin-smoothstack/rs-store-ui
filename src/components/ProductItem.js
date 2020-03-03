@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Button } from "react-bootstrap";
 import Product from "./Product";
 
 const ProductItem = ({ product, onAddToCartClicked }) => (
@@ -8,14 +9,15 @@ const ProductItem = ({ product, onAddToCartClicked }) => (
       name={product.name}
       retail_price_cents={product.retail_price_cents}
       description={product.description}
+      department={product.department}
       quantity={product.quantity}
     />
-    <button
+    <Button
       onClick={onAddToCartClicked}
       disabled={product.stock > 0 ? "" : "disabled"}
     >
-      {product.stock > 0 ? "Add to cart" : "Sold Out"}
-    </button>
+      Add to cart
+    </Button>
   </div>
 );
 

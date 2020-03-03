@@ -39,7 +39,10 @@ export const checkout = products => (dispatch, getState) => {
   });
 };
 
-export const setDepartment = department => ({
-  type: types.UPDATE_FILTER,
-  department,
-});
+export const setDepartment = department => dispatch => {
+  console.log("Dispatching SET_DEPARTMENT...");
+  dispatch({
+    type: types.SET_DEPARTMENT,
+    department,
+  });
+};

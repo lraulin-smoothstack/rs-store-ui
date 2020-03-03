@@ -9,5 +9,7 @@ export const RECEIVE_PRODUCTS = "RECEIVE_PRODUCTS";
 
 // Filter actions
 export const SET_DEPARTMENT = "SET_DEPARTMENT";
+export const GET_DEPARTMENT = "GET_DEPARTMENT";
 export const SET_SEARCH_STRING = "SET_SEARCH_STRING";
+export const GET_SEARCH_STRING = "GET_SEARCH_STRING";
 export const UPDATE_FILTER = "UPDATE_FILTER";
