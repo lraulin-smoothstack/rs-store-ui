@@ -25,7 +25,7 @@ const placeOrder = async ({ product_id, user_id, coupon_code, quantity }) => {
   const order = createOrder({ product_id, user_id, coupon_code, quantity });
   try {
     const result = await fetch(API_URL + "/orders", {
-      method: "post",
+      method: "POST",
       body: JSON.stringify(order),
     });
     const responseBody = await result.json();
@@ -57,5 +57,12 @@ export default {
         coupon_code,
       });
     }
+  },
+  login: async (email, password) => {
+    const result = await fetch(API_URL + "/login", {
+      method: "POST",
+      body: JSON.stringify({ email, password }),
+    });
+    console.log(result);
   },
 };
