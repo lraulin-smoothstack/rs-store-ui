@@ -9,11 +9,19 @@ import {
   Dropdown,
   DropdownButton,
 } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { Badge } from "react-bootstrap";
 import { connect } from "react-redux";
 import { setDepartment } from "../actions";
-import { getDepartment } from "../reducers";
+import { getDepartment, getTotalItems } from "../reducers";
 
-const FilterContainer = ({ department, searchString, dispatch }) => {
+const FilterContainer = ({
+  department,
+  totalItems,
+  searchString,
+  dispatch,
+}) => {
   const MEN = "Men";
   const WOMEN = "Women";
   const KIDS = "Kids";
@@ -64,6 +72,10 @@ const FilterContainer = ({ department, searchString, dispatch }) => {
         <FormControl type="text" placeholder="Search" className="mr-sm-2" />
         <Button variant="outline-light">Search</Button>
       </Form>
+      <Button>
+        <FontAwesomeIcon icon={faShoppingCart} />
+        <Badge pill>{totalItems}</Badge>
+      </Button>
     </>
   );
 };
@@ -84,6 +96,7 @@ const FilterContainer = ({ department, searchString, dispatch }) => {
 
 const mapStateToProps = state => ({
   department: getDepartment(state),
+  totalItems: getTotalItems(state),
 });
 
 export default connect(mapStateToProps)(FilterContainer);

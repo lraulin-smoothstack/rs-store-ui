@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Navbar, Nav, Button } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import FilterContainer from "../containers/FilterContainer";
 
 const Header = props => {
@@ -18,9 +16,6 @@ const Header = props => {
         <Navbar.Brand href="#home">Wu, Raulin & Co. Apparel</Navbar.Brand>
         <Nav className="mr-auto" />
         <FilterContainer />
-        <Button>
-          <FontAwesomeIcon icon={faShoppingCart} />
-        </Button>
       </Navbar>
     </>
   );
