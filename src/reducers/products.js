@@ -1,8 +1,6 @@
-import { combineReducers } from "redux";
 import {
   RECEIVE_PRODUCTS,
   ADD_TO_CART,
-  UPDATE_FILTER,
   SET_DEPARTMENT,
 } from "../constants/ActionTypes";
 

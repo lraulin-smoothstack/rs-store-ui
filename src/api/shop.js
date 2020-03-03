@@ -2,7 +2,6 @@
  * Mocking client-server processing
  */
 
-const TIMEOUT = 100;
 const API_URL = "https://0ogofj3z44.execute-api.us-east-1.amazonaws.com/dev";
 
 const createOrder = ({
