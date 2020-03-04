@@ -30,3 +30,4 @@ export const getCartProducts = state =>
 
 export const getVisibleProducts = state => {};
 export const getDepartment = state => state.filter.department;
+export const getSearchString = state => state.filter.searchString;

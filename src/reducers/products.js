@@ -2,6 +2,7 @@ import {
   RECEIVE_PRODUCTS,
   ADD_TO_CART,
   SET_DEPARTMENT,
+  SET_SEARCH_STRING,
 } from "../constants/ActionTypes";
 
 const products = (state, action) => {
@@ -27,7 +28,8 @@ const getVisibleIds = (productsById, department, searchString) => {
   if (searchString)
     products = products.filter(
       p =>
-        p.name.includes(searchString) || p.description.includes(searchString),
+        p.name.toLowerCase().includes(searchString.toLowerCase()) ||
+        p.description.toLowerCase().includes(searchString.toLowerCase()),
     );
   return products.map(p => p.id);
 };
@@ -44,6 +46,15 @@ const productReducer = (state = initialState, action) => {
         visibleIds: action.products.map(product => product.id),
       };
     case SET_DEPARTMENT:
+      return {
+        ...state,
+        visibleIds: getVisibleIds(
+          state.byId,
+          action.department,
+          action.searchString,
+        ),
+      };
+    case SET_SEARCH_STRING:
       return {
         ...state,
         visibleIds: getVisibleIds(

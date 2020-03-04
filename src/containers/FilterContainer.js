@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createRef } from "react";
 import PropTypes from "prop-types";
 import {
   Navbar,
@@ -13,8 +13,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { Badge } from "react-bootstrap";
 import { connect } from "react-redux";
-import { setDepartment } from "../actions";
-import { getDepartment, getTotalItems } from "../reducers";
+import { setDepartment, setSearchString } from "../actions";
+import { getDepartment, getSearchString, getTotalItems } from "../reducers";
 
 const FilterContainer = ({
   department,
@@ -22,13 +22,23 @@ const FilterContainer = ({
   searchString,
   dispatch,
 }) => {
+  // const [textInput, setTextInput] = useState("");
+
   const MEN = "Men";
   const WOMEN = "Women";
   const KIDS = "Kids";
   const departmentTitle = { Men: "Men's", Women: "Women's", Kids: "Kids'" };
-  const onSelectDepartment = department => {
-    console.log("onSelectDepartment");
-    setDepartment(department)(dispatch);
+
+  const onSelectDepartment = department => setDepartment(department)(dispatch);
+
+  let textInput = createRef();
+
+  const handleSubmitSearch = event => {
+    console.log("*** Handle Submit Search ***");
+    event.preventDefault();
+    event.stopPropagation();
+    const string = textInput.current.value;
+    setSearchString(string)(dispatch);
   };
 
   return (
@@ -50,27 +60,17 @@ const FilterContainer = ({
           {departmentTitle[KIDS]}
         </Dropdown.Item>
       </DropdownButton>
-      <Form inline>
-        {/* <Button
-    active={department === "mens"}
-    onClick={() => onSelectDepartment("mens")}
-  >
-    Men's
-  </Button>
-  <Button
-    active={department === "womens"}
-    onClick={() => onSelectDepartment("womens")}
-  >
-    Women's
-  </Button>
-  <Button
-    active={department === "kids"}
-    onClick={() => onSelectDepartment("kids")}
-  >
-    Kid's
-  </Button> */}
-        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-        <Button variant="outline-light">Search</Button>
+      <Form inline onSubmit={handleSubmitSearch}>
+        <FormControl
+          id="search"
+          type="text"
+          placeholder="Search"
+          className="mr-sm-2"
+          ref={textInput}
+        />
+        <Button variant="outline-light" type="submit">
+          Search
+        </Button>
       </Form>
       <Button>
         <FontAwesomeIcon icon={faShoppingCart} />
@@ -96,6 +96,7 @@ const FilterContainer = ({
 
 const mapStateToProps = state => ({
   department: getDepartment(state),
+  searchString: getSearchString(state),
   totalItems: getTotalItems(state),
 });
 

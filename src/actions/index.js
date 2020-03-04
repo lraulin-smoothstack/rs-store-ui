@@ -40,9 +40,15 @@ export const checkout = products => (dispatch, getState) => {
 };
 
 export const setDepartment = department => dispatch => {
-  console.log("Dispatching SET_DEPARTMENT...");
   dispatch({
     type: types.SET_DEPARTMENT,
     department,
+  });
+};
+
+export const setSearchString = searchString => dispatch => {
+  dispatch({
+    type: types.SET_SEARCH_STRING,
+    searchString,
   });
 };
