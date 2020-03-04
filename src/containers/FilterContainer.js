@@ -29,9 +29,15 @@ const FilterContainer = ({
   const KIDS = "Kids";
   const departmentTitle = { Men: "Men's", Women: "Women's", Kids: "Kids'" };
 
+  let textInput = createRef();
+
   const onSelectDepartment = department => setDepartment(department)(dispatch);
 
-  let textInput = createRef();
+  const reset = () => {
+    console.log("*** RESET ***");
+    setSearchString(null)(dispatch);
+    textInput.current.value = "";
+  };
 
   const handleSubmitSearch = event => {
     console.log("*** Handle Submit Search ***");
@@ -68,9 +74,15 @@ const FilterContainer = ({
           className="mr-sm-2"
           ref={textInput}
         />
-        <Button variant="outline-light" type="submit">
-          Search
-        </Button>
+        {searchString ? (
+          <Button variant="outline-danger" onClick={() => reset()}>
+            Reset
+          </Button>
+        ) : (
+          <Button variant="outline-light" type="submit">
+            Search
+          </Button>
+        )}
       </Form>
       <Button>
         <FontAwesomeIcon icon={faShoppingCart} />

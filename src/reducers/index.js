@@ -3,7 +3,11 @@ import products, * as fromProducts from "./products";
 import filter, * as fromFilter from "./filter";
 import { combineReducers } from "redux";
 
-export default combineReducers({ cart, products, filter });
+export default (state = {}, action) => ({
+  cart: cart(state.cart, action),
+  products: products(state.products, { ...action, prevFilter: state.filter }),
+  filter: filter(state.filter, action),
+});
 
 const getAddedIds = state => fromCart.getAddedIds(state.cart);
 const getQuantity = (state, id) => fromCart.getQuantity(state.cart, id);

@@ -51,7 +51,7 @@ const productReducer = (state = initialState, action) => {
         visibleIds: getVisibleIds(
           state.byId,
           action.department,
-          action.searchString,
+          action.prevFilter.searchString,
         ),
       };
     case SET_SEARCH_STRING:
@@ -59,7 +59,7 @@ const productReducer = (state = initialState, action) => {
         ...state,
         visibleIds: getVisibleIds(
           state.byId,
-          action.department,
+          action.prevFilter.department,
           action.searchString,
         ),
       };
