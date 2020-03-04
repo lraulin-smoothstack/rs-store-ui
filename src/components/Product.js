@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Card } from "react-bootstrap";
+import { Badge } from "react-bootstrap";
 
 const Product = ({
   id = 0,
@@ -9,20 +10,28 @@ const Product = ({
   department = "[Department Name]",
   photo_url = "http://placekitten.com/200/200?image=",
   retail_price_cents = 0,
-}) => (
-  <Card>
-    <Card.Img variant="top" src={photo_url + (id % 16)} />
-    <Card.Body>
-      <Card.Title>{name}</Card.Title>
-      <Card.Text>
-        <strong>{department}</strong>
-        <br />
-        {description}
-        <br />${(retail_price_cents / 100).toFixed(2)}
-      </Card.Text>
-    </Card.Body>
-  </Card>
-);
+}) => {
+  const badgeVariant = {
+    Men: "success",
+    Women: "danger",
+    Kids: "warning",
+  };
+  console.log(badgeVariant[department]);
+  return (
+    <Card>
+      <Card.Img variant="top" src={photo_url + (id % 16)} />
+      <Card.Body>
+        <Card.Title>{name}</Card.Title>
+        <Card.Text>
+          {description}
+          <br />
+          <Badge variant={badgeVariant[department]}>{department}</Badge>
+          <Badge variant="info">${(retail_price_cents / 100).toFixed(2)}</Badge>
+        </Card.Text>
+      </Card.Body>
+    </Card>
+  );
+};
 
 Product.propTypes = {
   id: PropTypes.number,

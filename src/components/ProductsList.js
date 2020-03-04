@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const ProductsList = ({ title, children }) => (
-  <div style={{ marginTop: "52px" }}>{children}</div>
+const ProductsList = ({ children }) => (
+  <div style={{ marginTop: "52px", marginLeft: "8px" }}>{children}</div>
 );
 
 ProductsList.propTypes = {
