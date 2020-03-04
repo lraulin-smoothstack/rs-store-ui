@@ -7,7 +7,7 @@ const Product = ({
   name = "[Product Name]",
   description = "[Description]",
   department = "[Department Name]",
-  photo_url = "http://placekitten.com/200/300?image=",
+  photo_url = "http://placekitten.com/200/200?image=",
   retail_price_cents = 0,
 }) => (
   <Card>

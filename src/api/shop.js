@@ -1,6 +1,7 @@
 /**
  * Mocking client-server processing
  */
+import axios from "axios";
 
 const API_URL = "https://0ogofj3z44.execute-api.us-east-1.amazonaws.com/dev";
 
@@ -59,10 +60,27 @@ export default {
     }
   },
   login: async (email, password) => {
-    const result = await fetch(API_URL + "/login", {
-      method: "POST",
-      body: JSON.stringify({ email, password }),
-    });
-    console.log(result);
+    // try {
+    //   const result = await fetch(API_URL + "/login", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //       email: "customer@customer.com",
+    //       password: "customer",
+    //     }),
+    //   });
+    //   console.log("LOGIN");
+    //   console.log(result);
+    //   const responseBody = await result.json();
+    //   console.log(responseBody);
+    // } catch (e) {
+    //   console.log(e);
+    // }
+    axios
+      .post(API_URL + "/login", { email, password })
+      .then(res => console.log(res))
+      .catch(e => console.log(e));
   },
 };
