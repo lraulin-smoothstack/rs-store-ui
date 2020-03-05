@@ -8,7 +8,7 @@ import {
   Row,
 } from "react-bootstrap";
 
-const UserContainer = () => (
+const LoginContainer = () => (
   <OverlayTrigger
     trigger="click"
     placement="bottom"
@@ -42,4 +42,4 @@ const UserContainer = () => (
   </OverlayTrigger>
 );
 
-export default UserContainer;
+export default LoginContainer;
