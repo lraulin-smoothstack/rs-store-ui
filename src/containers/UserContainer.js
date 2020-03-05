@@ -30,7 +30,7 @@ const UserContainer = () => (
                 <Form.Control type="password" placeholder="Password" />
               </Col>
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" style={{ float: "right" }}>
               Submit
             </Button>
           </Form>
