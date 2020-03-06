@@ -5,9 +5,6 @@ import Header from "../components/Header";
 import shop from "../api/shop";
 
 const App = () => {
-  useEffect(() => {
-    shop.login("customer@customer.com", "customer");
-  }, []);
   return (
     <div>
       <Header />

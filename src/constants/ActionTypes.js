@@ -13,3 +13,7 @@ export const GET_DEPARTMENT = "GET_DEPARTMENT";
 export const SET_SEARCH_STRING = "SET_SEARCH_STRING";
 export const GET_SEARCH_STRING = "GET_SEARCH_STRING";
 export const UPDATE_FILTER = "UPDATE_FILTER";
+
+// User actions
+export const LOGIN = "LOGIN";
+export const LOGOUT = "LOGOUT";

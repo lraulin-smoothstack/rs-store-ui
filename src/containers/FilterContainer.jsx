@@ -21,6 +21,8 @@ const FilterContainer = ({
   totalItems,
   searchString,
   dispatch,
+  setDepartment,
+  setSearchString,
 }) => {
   // const [textInput, setTextInput] = useState("");
 
@@ -31,7 +33,7 @@ const FilterContainer = ({
 
   let textInput = createRef();
 
-  const onSelectDepartment = department => setDepartment(department)(dispatch);
+  const onSelectDepartment = department => setDepartment(department);
 
   const reset = () => {
     console.log("*** RESET ***");
@@ -44,7 +46,7 @@ const FilterContainer = ({
     event.preventDefault();
     event.stopPropagation();
     const string = textInput.current.value;
-    setSearchString(string)(dispatch);
+    setSearchString(string);
   };
 
   return (
@@ -112,4 +114,6 @@ const mapStateToProps = state => ({
   totalItems: getTotalItems(state),
 });
 
-export default connect(mapStateToProps)(FilterContainer);
+const mapDispatchToProps = { setDepartment, setSearchString };
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilterContainer);

@@ -1,4 +1,5 @@
 import shop from "../api/shop";
+import mock from "../api/mock";
 import * as types from "../constants/ActionTypes";
 
 const receiveProducts = products => ({
@@ -50,5 +51,19 @@ export const setSearchString = searchString => dispatch => {
   dispatch({
     type: types.SET_SEARCH_STRING,
     searchString,
+  });
+};
+
+export const login = ({ email, password }) => dispatch => {
+  console.log("Login action: calling login api");
+  mock.login({ email, password }).then(jwt => {
+    console.log("Login action: jwt = " + jwt);
+    localStorage.setItem("jwt", jwt);
+    console.log("Dispatching login action...");
+    dispatch({
+      type: types.LOGIN,
+      email,
+      jwt,
+    });
   });
 };

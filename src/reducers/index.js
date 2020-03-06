@@ -1,12 +1,14 @@
 import cart, * as fromCart from "./cart";
 import products, * as fromProducts from "./products";
 import filter, * as fromFilter from "./filter";
+import user, * as fromUser from "./filter";
 import { combineReducers } from "redux";
 
 export default (state = {}, action) => ({
   cart: cart(state.cart, action),
   products: products(state.products, { ...action, prevFilter: state.filter }),
   filter: filter(state.filter, action),
+  user: user(state.user, action),
 });
 
 const getAddedIds = state => fromCart.getAddedIds(state.cart);
@@ -32,6 +34,6 @@ export const getCartProducts = state =>
     quantity: getQuantity(state, id),
   }));
 
-export const getVisibleProducts = state => {};
 export const getDepartment = state => state.filter.department;
 export const getSearchString = state => state.filter.searchString;
+export const getEmail = state => state.user.email;

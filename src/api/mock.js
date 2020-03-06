@@ -1,5 +1,3 @@
-"use strict";
-
 const pwdMap = () => {};
 
 const pwdDb = {
@@ -26,7 +24,6 @@ export default {
   login: async ({ email, password }) => {
     await stall();
     const jwt = retrieveJwt({ email, password });
-    if (jwt) localStorage.setItem("jwt", jwt);
     console.log("Token stored!");
     console.log(localStorage.getItem("jwt"));
   },
