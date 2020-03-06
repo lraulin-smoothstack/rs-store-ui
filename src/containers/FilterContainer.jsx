@@ -1,4 +1,4 @@
-import React, { createRef } from "react";
+import React, { createRef, useState } from "react";
 import PropTypes from "prop-types";
 import {
   Navbar,
@@ -31,22 +31,21 @@ const FilterContainer = ({
   const KIDS = "Kids";
   const departmentTitle = { Men: "Men's", Women: "Women's", Kids: "Kids'" };
 
-  let textInput = createRef();
+  const [textInput, setTextInput] = useState("");
 
   const onSelectDepartment = department => setDepartment(department);
 
   const reset = () => {
     console.log("*** RESET ***");
-    setSearchString(null)(dispatch);
-    textInput.current.value = "";
+    setSearchString(null);
+    setTextInput("");
   };
 
   const handleSubmitSearch = event => {
     console.log("*** Handle Submit Search ***");
     event.preventDefault();
     event.stopPropagation();
-    const string = textInput.current.value;
-    setSearchString(string);
+    setSearchString(textInput);
   };
 
   return (
@@ -74,7 +73,8 @@ const FilterContainer = ({
           type="text"
           placeholder="Search"
           className="mr-sm-2"
-          ref={textInput}
+          value={textInput}
+          onChange={event => setTextInput(event.target.value)}
         />
         {searchString ? (
           <Button variant="outline-danger" onClick={() => reset()}>
