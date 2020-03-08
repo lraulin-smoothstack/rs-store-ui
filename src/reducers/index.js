@@ -1,7 +1,7 @@
 import cart, * as fromCart from "./cart";
 import products, * as fromProducts from "./products";
 import filter, * as fromFilter from "./filter";
-import user, * as fromUser from "./filter";
+import user, * as fromUser from "./user";
 import { combineReducers } from "redux";
 
 export default (state = {}, action) => ({
@@ -37,3 +37,4 @@ export const getCartProducts = state =>
 export const getDepartment = state => state.filter.department;
 export const getSearchString = state => state.filter.searchString;
 export const getEmail = state => state.user.email;
+export const getFirstName = state => state.user.first_name;

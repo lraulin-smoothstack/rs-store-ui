@@ -1,7 +1,7 @@
 /**
  * Mocking client-server processing
  */
-const API_URL = "https://0ogofj3z44.execute-api.us-east-1.amazonaws.com/dev";
+const API_URL = "https://zr8lc1a181.execute-api.us-east-1.amazonaws.com/dev";
 
 const createOrder = ({
   product_id = 0,
@@ -25,10 +25,14 @@ const placeOrder = async ({ product_id, user_id, coupon_code, quantity }) => {
   try {
     const result = await fetch(API_URL + "/orders", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(order),
     });
     const responseBody = await result.json();
-    console.log(responseBody);
+    const orderId = responseBody.insertId;
+    console.log("Order " + orderId + " created successfully.");
   } catch (e) {
     console.log(e);
   }
@@ -47,19 +51,17 @@ export default {
   buyProducts: payload => {
     console.log("Placing order...");
     for (let item of payload) {
-      const user_id = 0; // TODO
-      const coupon_code = null; // TODO
       placeOrder({
-        product_id: item.id,
+        product_id: item.product_id,
         quantity: item.quantity,
-        user_id,
-        coupon_code,
+        user_id: item.user_id,
+        coupon_code: item.coupon_code,
       });
     }
   },
   login: async (email, password) => {
     try {
-      const result = await fetch(API_URL + "/login", {
+      const response = await fetch(API_URL + "/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -69,10 +71,8 @@ export default {
           password: "customer",
         }),
       });
-      console.log("LOGIN");
-      console.log(result);
-      const responseBody = await result.json();
-      console.log(responseBody);
+      const responseBody = await response.json();
+      return responseBody;
     } catch (e) {
       console.log(e);
     }

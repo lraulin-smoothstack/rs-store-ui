@@ -16,4 +16,5 @@ export const UPDATE_FILTER = "UPDATE_FILTER";
 
 // User actions
 export const LOGIN = "LOGIN";
+export const RECOVER_LOGIN = "RECOVER_LOGIN";
 export const LOGOUT = "LOGOUT";

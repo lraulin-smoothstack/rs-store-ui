@@ -1,7 +1,7 @@
 import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
-import FilterContainer from "../containers/FilterContainer";
-import LoginContainer from "../containers/LoginContainer";
+import FilterContainer from "../../containers/FilterContainer";
+import LoginContainer from "../../containers/LoginContainer";
 
 const Header = props => (
   <>

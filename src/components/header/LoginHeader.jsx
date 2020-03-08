@@ -7,9 +7,9 @@ import {
   Popover,
   Row,
 } from "react-bootstrap";
-import { login } from "../actions";
+import { login } from "../../actions";
 
-const LoginHeader = () => {
+const LoginHeader = ({ onClickLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -17,7 +17,7 @@ const LoginHeader = () => {
     event.preventDefault();
     event.stopPropagation();
     console.log("Submitting login with " + email + " and " + password);
-    login({ email, password });
+    onClickLogin({ email, password });
   };
 
   return (
@@ -64,7 +64,7 @@ const LoginHeader = () => {
         </Popover>
       }
     >
-      <Button variant="secondary">Sign In</Button>
+      <Button variant="secondary">Log In</Button>
     </OverlayTrigger>
   );
 };

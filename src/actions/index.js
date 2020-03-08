@@ -1,5 +1,4 @@
 import shop from "../api/shop";
-import mock from "../api/mock";
 import * as types from "../constants/ActionTypes";
 
 const receiveProducts = products => ({
@@ -25,12 +24,22 @@ export const addToCart = productId => (dispatch, getState) => {
 };
 
 export const checkout = products => (dispatch, getState) => {
-  const { cart } = getState();
+  const { cart, user } = getState();
+  console.log("CHECKOUT ACTION");
+  console.log(cart);
 
   dispatch({
     type: types.CHECKOUT_REQUEST,
   });
-  shop.buyProducts(products, () => {
+
+  const orders = cart.addedIds.map(productId => ({
+    user_id: user.user_id,
+    product_id: productId,
+    quantity: cart.quantityById[productId],
+    coupon_code: null,
+  }));
+
+  shop.buyProducts(orders, () => {
     dispatch({
       type: types.CHECKOUT_SUCCESS,
       cart,
@@ -55,15 +64,34 @@ export const setSearchString = searchString => dispatch => {
 };
 
 export const login = ({ email, password }) => dispatch => {
-  console.log("Login action: calling login api");
-  mock.login({ email, password }).then(jwt => {
-    console.log("Login action: jwt = " + jwt);
-    localStorage.setItem("jwt", jwt);
-    console.log("Dispatching login action...");
+  shop.login({ email, password }).then(result => {
+    console.log("LOGIN RESULT");
+    localStorage.setItem("jwt", result.jwt);
     dispatch({
       type: types.LOGIN,
+      ...result,
+    });
+  });
+};
+
+export const logout = () => dispatch => {
+  localStorage.removeItem("email");
+  localStorage.removeItem("jwt");
+  dispatch({ type: types.LOGOUT });
+};
+
+export const recoverLogin = () => dispatch => {
+  const [email, jwt] = [
+    localStorage.getItem("email"),
+    localStorage.getItem("jwt"),
+  ];
+
+  if (email && jwt) {
+    console.log("User login recovered from local storage.");
+    dispatch({
+      type: types.RECOVER_LOGIN,
       email,
       jwt,
     });
-  });
+  }
 };
