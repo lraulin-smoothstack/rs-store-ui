@@ -74,6 +74,17 @@ export const login = ({ email, password }) => dispatch => {
   });
 };
 
+export const register = ({ email, password }) => dispatch => {
+  shop.register({ email, password }).then(result => {
+    console.log("REGISTER RESULT");
+    localStorage.setItem("jwt", result.jwt);
+    dispatch({
+      type: types.REGISTER,
+      ...result,
+    });
+  });
+};
+
 export const logout = () => dispatch => {
   localStorage.removeItem("email");
   localStorage.removeItem("jwt");

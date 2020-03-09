@@ -1,19 +1,14 @@
 import React, { useState } from "react";
-import {
-  Button,
-  Col,
-  Form,
-  OverlayTrigger,
-  Popover,
-  Row,
-} from "react-bootstrap";
-import { login } from "../../actions";
+import { Button, OverlayTrigger, Popover, Tabs, Tab } from "react-bootstrap";
+import Login from "./Login";
+import Register from "./Register";
 
-const LoginHeader = ({ onClickLogin }) => {
+const LoginHeader = ({ login, onClickRegister }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loginOrRegister, setLoginOrRegister] = useState("login");
 
-  const handleSubmit = event => {
+  const handleSubmitLogin = event => {
     event.preventDefault();
     event.stopPropagation();
     console.log("Submitting login with " + email + " and " + password);
@@ -27,39 +22,30 @@ const LoginHeader = ({ onClickLogin }) => {
       overlay={
         <Popover id="signinPopover">
           <Popover.Content>
-            <Form onSubmit={handleSubmit}>
-              <Form.Group as={Row} controlId="formPlaintextEmail">
-                {/* <Form.Label column sm="2"> */}
-                <Col sm="10">
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control
-                    plaintext
-                    placeholder="email@example.com"
-                    value={email}
-                    onChange={event => setEmail(event.target.value)}
-                  />
-                </Col>
-              </Form.Group>
-
-              <Form.Group as={Row} controlId="formPlaintextPassword">
-                <Col sm="10">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={event => setPassword(event.target.value)}
-                  />
-                </Col>
-              </Form.Group>
-              <Button
-                variant="primary"
-                type="submit"
-                style={{ float: "right" }}
-              >
-                Submit
-              </Button>
-            </Form>
+            <Tabs
+              id="controlled-tab-example"
+              activeKey={loginOrRegister}
+              onSelect={k => setLoginOrRegister(k)}
+            >
+              <Tab eventKey="login" title="Log In">
+                <Login
+                  handleSubmit={handleSubmitLogin}
+                  email={email}
+                  password={password}
+                  setEmail={setEmail}
+                  setPassword={setPassword}
+                />
+              </Tab>
+              <Tab eventKey="register" title="Register">
+                <Register
+                  handleRegister={handleRegister}
+                  email={email}
+                  password={password}
+                  setEmail={setEmail}
+                  setPassword={setPassword}
+                />
+              </Tab>
+            </Tabs>
           </Popover.Content>
         </Popover>
       }

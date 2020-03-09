@@ -67,8 +67,26 @@ export default {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: "customer@customer.com",
-          password: "customer",
+          email,
+          password,
+        }),
+      });
+      const responseBody = await response.json();
+      return responseBody;
+    } catch (e) {
+      console.log(e);
+    }
+  },
+  register: async (email, password) => {
+    try {
+      const response = await fetch(API_URL + "/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
         }),
       });
       const responseBody = await response.json();
