@@ -1,17 +1,15 @@
 import React, { useEffect } from "react";
 import ProductsContainer from "./ProductsContainer";
 import CartContainer from "./CartContainer";
-import Header from "../components/header/Header";
+import Header from "../components/Header";
 import shop from "../api/shop";
 
 const App = () => {
   return (
     <div>
       <Header />
-      <hr />
+      <br />
       <ProductsContainer />
-      <hr />
-      <CartContainer />
     </div>
   );
 };

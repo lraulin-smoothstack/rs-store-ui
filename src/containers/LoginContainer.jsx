@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import LoginHeader from "../components/header/LoginHeader";
+import LoginHeader from "../components/account/LoginHeader";
 import { connect } from "react-redux";
 import { login, recoverLogin } from "../actions";
 import { getFirstName, getEmail } from "../reducers";
-import WelcomeHeader from "../components/header/WelcomeHeader";
+import WelcomeHeader from "../components/account/WelcomeHeader";
 
 const LoginContainer = ({ email, firstName, login, recoverLogin }) => {
   useEffect(() => {

@@ -1,7 +1,8 @@
 import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
-import FilterContainer from "../../containers/FilterContainer";
-import LoginContainer from "../../containers/LoginContainer";
+import FilterContainer from "../containers/FilterContainer";
+import LoginContainer from "../containers/LoginContainer";
+import CartContainer from "../containers/CartContainer";
 
 const Header = props => (
   <>
@@ -10,6 +11,7 @@ const Header = props => (
       <Nav className="mr-auto" />
       <FilterContainer />
       <LoginContainer />
+      <CartContainer />
     </Navbar>
   </>
 );

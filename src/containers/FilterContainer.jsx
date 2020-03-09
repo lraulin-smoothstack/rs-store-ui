@@ -9,9 +9,6 @@ import {
   Dropdown,
   DropdownButton,
 } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-import { Badge } from "react-bootstrap";
 import { connect } from "react-redux";
 import { setDepartment, setSearchString } from "../actions";
 import { getDepartment, getSearchString, getTotalItems } from "../reducers";
@@ -86,10 +83,6 @@ const FilterContainer = ({
           </Button>
         )}
       </Form>
-      <Button>
-        <FontAwesomeIcon icon={faShoppingCart} />
-        <Badge pill>{totalItems}</Badge>
-      </Button>
     </>
   );
 };
@@ -111,7 +104,6 @@ const FilterContainer = ({
 const mapStateToProps = state => ({
   department: getDepartment(state),
   searchString: getSearchString(state),
-  totalItems: getTotalItems(state),
 });
 
 const mapDispatchToProps = { setDepartment, setSearchString };
