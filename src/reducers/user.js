@@ -1,4 +1,9 @@
-import { LOGIN, RECOVER_LOGIN, LOGOUT } from "../constants/ActionTypes";
+import {
+  LOGIN,
+  RECOVER_LOGIN,
+  LOGOUT,
+  REGISTER,
+} from "../constants/ActionTypes";
 
 const initialState = {
   address: "",
@@ -13,6 +18,7 @@ const initialState = {
 const user = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN:
+    case REGISTER:
     case RECOVER_LOGIN:
       return {
         address: action.address,

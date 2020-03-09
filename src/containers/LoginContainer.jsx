@@ -5,7 +5,13 @@ import { login, recoverLogin, register } from "../actions";
 import { getFirstName, getEmail } from "../reducers";
 import WelcomeHeader from "../components/account/WelcomeHeader";
 
-const LoginContainer = ({ email, firstName, login, recoverLogin }) => {
+const LoginContainer = ({
+  email,
+  firstName,
+  login,
+  register,
+  recoverLogin,
+}) => {
   useEffect(() => {
     if (!email) recoverLogin();
   }, [email]);

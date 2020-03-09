@@ -75,8 +75,10 @@ export const login = ({ email, password }) => dispatch => {
 };
 
 export const register = ({ email, password }) => dispatch => {
+  console.log("Dispatched register action calling register API...");
   shop.register({ email, password }).then(result => {
     console.log("REGISTER RESULT");
+    console.log(result);
     localStorage.setItem("jwt", result.jwt);
     dispatch({
       type: types.REGISTER,

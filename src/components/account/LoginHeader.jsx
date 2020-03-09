@@ -3,17 +3,10 @@ import { Button, OverlayTrigger, Popover, Tabs, Tab } from "react-bootstrap";
 import Login from "./Login";
 import Register from "./Register";
 
-const LoginHeader = ({ login, onClickRegister }) => {
+const LoginHeader = ({ login, register }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginOrRegister, setLoginOrRegister] = useState("login");
-
-  const handleSubmitLogin = event => {
-    event.preventDefault();
-    event.stopPropagation();
-    console.log("Submitting login with " + email + " and " + password);
-    onClickLogin({ email, password });
-  };
 
   return (
     <OverlayTrigger
@@ -29,7 +22,7 @@ const LoginHeader = ({ login, onClickRegister }) => {
             >
               <Tab eventKey="login" title="Log In">
                 <Login
-                  handleSubmit={handleSubmitLogin}
+                  login={login}
                   email={email}
                   password={password}
                   setEmail={setEmail}
@@ -38,7 +31,7 @@ const LoginHeader = ({ login, onClickRegister }) => {
               </Tab>
               <Tab eventKey="register" title="Register">
                 <Register
-                  handleRegister={handleRegister}
+                  register={register}
                   email={email}
                   password={password}
                   setEmail={setEmail}

@@ -59,7 +59,10 @@ export default {
       });
     }
   },
-  login: async (email, password) => {
+  login: async ({ email, password }) => {
+    console.log("Login api");
+    console.log(email);
+    console.log(password);
     try {
       const response = await fetch(API_URL + "/login", {
         method: "POST",
@@ -77,7 +80,7 @@ export default {
       console.log(e);
     }
   },
-  register: async (email, password) => {
+  register: async ({ email, password }) => {
     try {
       const response = await fetch(API_URL + "/register", {
         method: "POST",
