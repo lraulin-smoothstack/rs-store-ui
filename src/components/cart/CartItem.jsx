@@ -21,7 +21,9 @@ const CartItem = ({
         <Form.Control
           type="number"
           value={quantity}
-          onChange={e => updateQuantity(id, e.target.value)}
+          onChange={e =>
+            e.target.value > 0 ? updateQuantity(id, e.target.value) : null
+          }
         />
       </td>
       <td>{"$" + ((retail_price_cents / 100) * quantity).toFixed(2)}</td>
