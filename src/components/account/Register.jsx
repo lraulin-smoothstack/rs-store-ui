@@ -7,13 +7,9 @@ const Register = ({ register, email, setEmail, password, setPassword }) => {
   const [passwordMismatch, setPasswordMismatch] = useState(false);
 
   const handleSubmit = event => {
-    console.log("***Submitting Registration!***");
     event.preventDefault();
     event.stopPropagation();
     if (password === confirmPassword) {
-      console.log(
-        `Passwords match. Calling register with email ${email} and ${password}.`,
-      );
       setPasswordMismatch(false);
       register({ email, password });
     } else {

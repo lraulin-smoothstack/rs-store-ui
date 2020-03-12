@@ -16,7 +16,6 @@ const Product = ({
     Women: "danger",
     Kids: "warning",
   };
-  console.log(badgeVariant[department]);
   return (
     <Card>
       <Card.Img variant="top" src={photo_url + (id % 16)} />

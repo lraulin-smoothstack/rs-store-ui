@@ -25,15 +25,12 @@ export const addToCart = productId => (dispatch, getState) => {
 
 export const checkout = products => (dispatch, getState) => {
   const { cart, user } = getState();
-  console.log("CHECKOUT ACTION");
-  console.log(cart);
-
   dispatch({
     type: types.CHECKOUT_REQUEST,
   });
 
   const orders = cart.addedIds.map(productId => ({
-    user_id: user.user_id,
+    id: user.id,
     product_id: productId,
     quantity: cart.quantityById[productId],
     coupon_code: null,
@@ -44,8 +41,6 @@ export const checkout = products => (dispatch, getState) => {
       type: types.CHECKOUT_SUCCESS,
       cart,
     });
-    // Replace the line above with line below to rollback on failure:
-    // dispatch({ type: types.CHECKOUT_FAILURE, cart })
   });
 };
 
@@ -63,48 +58,104 @@ export const setSearchString = searchString => dispatch => {
   });
 };
 
+const storeAllLocally = object => {
+  for (const [key, value] of Object.entries(object)) {
+    localStorage.setItem(key, value);
+  }
+};
+
 export const login = ({ email, password }) => dispatch => {
-  shop.login({ email, password }).then(result => {
-    console.log("LOGIN RESULT");
-    localStorage.setItem("jwt", result.jwt);
+  shop.login({ email, password }).then(userDetails => {
+    console.log("LOGIN");
+    console.log(userDetails);
+    storeAllLocally(userDetails);
+
     dispatch({
       type: types.LOGIN,
-      ...result,
+      ...userDetails,
     });
   });
 };
 
 export const register = ({ email, password }) => dispatch => {
-  console.log("Dispatched register action calling register API...");
-  shop.register({ email, password }).then(result => {
-    console.log("REGISTER RESULT");
-    console.log(result);
-    localStorage.setItem("jwt", result.jwt);
+  shop.register({ email, password }).then(userDetails => {
+    storeAllLocally(userDetails);
+
     dispatch({
       type: types.REGISTER,
-      ...result,
+      ...userDetails,
     });
   });
 };
 
+const userFields = [
+  "id",
+  "email",
+  "address",
+  "first_name",
+  "last_name",
+  "role",
+  "phone",
+  "jwt",
+];
+
 export const logout = () => dispatch => {
-  localStorage.removeItem("email");
-  localStorage.removeItem("jwt");
+  userFields.forEach(x => localStorage.removeItem(x));
   dispatch({ type: types.LOGOUT });
 };
 
 export const recoverLogin = () => dispatch => {
-  const [email, jwt] = [
-    localStorage.getItem("email"),
-    localStorage.getItem("jwt"),
-  ];
+  const userDetails = userFields.reduce((object, key) => {
+    object[key] = localStorage.getItem(key);
+    return object;
+  }, {});
 
-  if (email && jwt) {
-    console.log("User login recovered from local storage.");
+  if (userDetails.email && userDetails.jwt) {
     dispatch({
       type: types.RECOVER_LOGIN,
-      email,
-      jwt,
+      ...userDetails,
     });
   }
+};
+
+export const updateUserDetails = ({
+  email,
+  first_name,
+  last_name,
+  address,
+  phone,
+}) => (dispatch, getState) => {
+  console.log("UPDATE USER DETAILS ACTION");
+  const { user } = getState();
+  const { id, jwt } = user;
+
+  console.log("CALLING UPDATE USER FROM ACTIONS");
+  shop
+    .updateUser({ id, email, first_name, last_name, address, phone, jwt })
+    .then(response => {
+      if (response && response.affectedRows) {
+        console.log("User successfully updated!");
+        localStorage.setItem("id", id);
+        localStorage.setItem("email", email);
+        localStorage.setItem("first_name", first_name);
+        localStorage.setItem("last_name", last_name);
+        localStorage.setItem("address", address);
+        localStorage.setItem("phone", phone);
+        localStorage.setItem("jwt", jwt);
+
+        dispatch({
+          type: types.UPDATE_USER_DETAILS,
+          id,
+          email,
+          first_name,
+          last_name,
+          address,
+          phone,
+          jwt,
+        });
+      } else {
+        console.log("Error updating user!");
+        console.log(response);
+      }
+    });
 };

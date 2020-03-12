@@ -19,3 +19,4 @@ export const LOGIN = "LOGIN";
 export const REGISTER = "REGISTER";
 export const RECOVER_LOGIN = "RECOVER_LOGIN";
 export const LOGOUT = "LOGOUT";
+export const UPDATE_USER_DETAILS = "UPDATE_USER_DETAILS";
