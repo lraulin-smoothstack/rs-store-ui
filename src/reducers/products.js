@@ -1,6 +1,5 @@
 import {
   RECEIVE_PRODUCTS,
-  ADD_TO_CART,
   SET_DEPARTMENT,
   SET_SEARCH_STRING,
 } from "../constants/ActionTypes";

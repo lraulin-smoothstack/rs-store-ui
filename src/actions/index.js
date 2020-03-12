@@ -159,3 +159,18 @@ export const updateUserDetails = ({
       }
     });
 };
+
+export const updateQuantity = (itemId, quantity) => dispatch => {
+  dispatch({
+    type: types.UPDATE_QUANTITY,
+    itemId,
+    quantity,
+  });
+};
+
+export const removeItem = itemId => dispatch => {
+  dispatch({
+    type: types.REMOVE_ITEM,
+    itemId,
+  });
+};

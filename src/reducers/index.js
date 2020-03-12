@@ -40,3 +40,5 @@ export const getFirstName = state => state.user.first_name;
 export const getLastName = state => state.user.last_name;
 export const getAddress = state => state.user.address;
 export const getPhone = state => state.user.phone;
+export const getCartAddedIds = state => state.cart.addedIds;
+export const getQuantityById = state => id => getQuantity(state, id);
