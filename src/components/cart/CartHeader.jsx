@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { Badge } from "react-bootstrap";
 import Cart from "./Cart";
+import CartItem from "./CartItem";
 
 const CartHeader = ({
   products,
@@ -11,6 +12,8 @@ const CartHeader = ({
   totalItems,
   onCheckoutClicked,
   getQuantityById,
+  removeItem,
+  updateQuantity,
 }) => {
   return (
     <OverlayTrigger
@@ -20,11 +23,22 @@ const CartHeader = ({
         <Popover id="signinPopover">
           <Popover.Content>
             <Cart
-              products={products}
+              hasProducts={Array.isArray(products) && products.length > 0}
               total={total}
               onCheckoutClicked={onCheckoutClicked}
-              getQuantityById={getQuantityById}
-            />
+            >
+              {products.map(product => (
+                <CartItem
+                  id={product.id}
+                  name={product.name}
+                  retail_price_cents={product.retail_price_cents}
+                  key={product.id}
+                  getQuantityById={getQuantityById}
+                  updateQuantity={updateQuantity}
+                  removeItem={removeItem}
+                />
+              ))}
+            </Cart>
           </Popover.Content>
         </Popover>
       }
