@@ -5,8 +5,6 @@ import { connect } from "react-redux";
 import { recoverLogin } from "../actions";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-import shop from "../api/shop";
-
 const App = ({ recoverLogin }) => {
   recoverLogin();
 
