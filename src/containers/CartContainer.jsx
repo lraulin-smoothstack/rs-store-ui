@@ -1,16 +1,32 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { checkout } from "../actions";
-import { getTotal, getCartProducts, getTotalItems } from "../reducers";
+import { checkout, removeItem, updateQuantity } from "../actions";
+import {
+  getTotal,
+  getCartProducts,
+  getTotalItems,
+  getQuantityById,
+} from "../reducers";
 import CartHeader from "../components/cart/CartHeader";
 
-const CartContainer = ({ products, total, checkout, totalItems }) => (
+const CartContainer = ({
+  products,
+  total,
+  checkout,
+  totalItems,
+  getQuantityById,
+  removeItem,
+  updateQuantity,
+}) => (
   <CartHeader
     products={products}
     total={total}
     totalItems={totalItems}
     onCheckoutClicked={() => checkout(products)}
+    getQuantityById={getQuantityById}
+    removeItem={removeItem}
+    updateQuantity={updateQuantity}
   />
 );
 
@@ -33,6 +49,13 @@ const mapStateToProps = state => ({
   products: getCartProducts(state),
   total: getTotal(state),
   totalItems: getTotalItems(state),
+  getQuantityById: getQuantityById(state),
 });
 
-export default connect(mapStateToProps, { checkout })(CartContainer);
+const mapDispatchToProps = {
+  checkout,
+  removeItem,
+  updateQuantity,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartContainer);

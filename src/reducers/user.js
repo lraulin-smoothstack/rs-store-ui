@@ -3,6 +3,7 @@ import {
   RECOVER_LOGIN,
   LOGOUT,
   REGISTER,
+  UPDATE_USER_DETAILS,
 } from "../constants/ActionTypes";
 
 const initialState = {
@@ -12,7 +13,7 @@ const initialState = {
   jwt: "",
   last_name: "",
   role: 0,
-  user_id: 0,
+  id: 0,
 };
 
 const user = (state = initialState, action) => {
@@ -20,6 +21,7 @@ const user = (state = initialState, action) => {
     case LOGIN:
     case REGISTER:
     case RECOVER_LOGIN:
+    case UPDATE_USER_DETAILS:
       return {
         address: action.address,
         email: action.email,
@@ -27,7 +29,8 @@ const user = (state = initialState, action) => {
         jwt: action.jwt,
         last_name: action.last_name,
         role: action.role,
-        user_id: action.id,
+        id: action.id,
+        phone: action.phone,
       };
     case LOGOUT:
       return initialState;

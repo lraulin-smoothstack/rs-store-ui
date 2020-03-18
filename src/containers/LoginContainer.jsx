@@ -1,16 +1,33 @@
 import React, { useEffect } from "react";
 import LoginHeader from "../components/account/LoginHeader";
 import { connect } from "react-redux";
-import { login, recoverLogin, register } from "../actions";
-import { getFirstName, getEmail } from "../reducers";
+import {
+  login,
+  recoverLogin,
+  register,
+  logout,
+  updateUserDetails,
+} from "../actions";
+import {
+  getFirstName,
+  getLastName,
+  getEmail,
+  getAddress,
+  getPhone,
+} from "../reducers";
 import WelcomeHeader from "../components/account/WelcomeHeader";
 
 const LoginContainer = ({
+  address,
   email,
-  firstName,
+  first_name,
+  last_name,
   login,
-  register,
+  logout,
+  phone,
   recoverLogin,
+  register,
+  updateUserDetails,
 }) => {
   useEffect(() => {
     if (!email) recoverLogin();
@@ -19,7 +36,15 @@ const LoginContainer = ({
   return (
     <>
       {email ? (
-        <WelcomeHeader firstName={firstName} />
+        <WelcomeHeader
+          address={address}
+          email={email}
+          first_name={first_name}
+          last_name={last_name}
+          phone={phone}
+          logout={logout}
+          updateUserDetails={updateUserDetails}
+        />
       ) : (
         <LoginHeader login={login} register={register} />
       )}
@@ -29,13 +54,18 @@ const LoginContainer = ({
 
 const mapStateToProps = state => ({
   email: getEmail(state),
-  firstName: getFirstName(state),
+  first_name: getFirstName(state),
+  last_name: getLastName(state),
+  address: getAddress(state),
+  phone: getPhone(state),
 });
 
 const mapDispatchToProps = {
   login,
+  logout,
   recoverLogin,
   register,
+  updateUserDetails,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);

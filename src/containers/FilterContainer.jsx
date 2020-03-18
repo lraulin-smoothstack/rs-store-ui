@@ -1,8 +1,5 @@
-import React, { createRef, useState } from "react";
-import PropTypes from "prop-types";
+import React, { useState } from "react";
 import {
-  Navbar,
-  Nav,
   Form,
   FormControl,
   Button,
@@ -11,13 +8,11 @@ import {
 } from "react-bootstrap";
 import { connect } from "react-redux";
 import { setDepartment, setSearchString } from "../actions";
-import { getDepartment, getSearchString, getTotalItems } from "../reducers";
+import { getDepartment, getSearchString } from "../reducers";
 
 const FilterContainer = ({
   department,
-  totalItems,
   searchString,
-  dispatch,
   setDepartment,
   setSearchString,
 }) => {
@@ -33,13 +28,11 @@ const FilterContainer = ({
   const onSelectDepartment = department => setDepartment(department);
 
   const reset = () => {
-    console.log("*** RESET ***");
     setSearchString(null);
     setTextInput("");
   };
 
   const handleSubmitSearch = event => {
-    console.log("*** Handle Submit Search ***");
     event.preventDefault();
     event.stopPropagation();
     setSearchString(textInput);

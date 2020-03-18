@@ -1,5 +1,6 @@
 {
   "name": "rs-store-ui",
+  "description": "GC Fashion Store",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

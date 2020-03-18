@@ -1,21 +1,20 @@
 import {
   RECEIVE_PRODUCTS,
-  ADD_TO_CART,
   SET_DEPARTMENT,
   SET_SEARCH_STRING,
 } from "../constants/ActionTypes";
 
-const products = (state, action) => {
-  switch (action.type) {
-    case ADD_TO_CART:
-      return {
-        ...state,
-        inventory: state.stock - 1,
-      };
-    default:
-      return state;
-  }
-};
+// const products = (state, action) => {
+//   switch (action.type) {
+//     case ADD_TO_CART:
+//       return {
+//         ...state,
+//         inventory: state.stock - 1,
+//       };
+//     default:
+//       return state;
+//   }
+// };
 
 const initialState = {
   byId: {},

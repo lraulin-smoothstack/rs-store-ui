@@ -1,6 +1,8 @@
 .env
 *secret*
 
+*.iml
+
 # dependencies
 /node_modules
 /.pnp

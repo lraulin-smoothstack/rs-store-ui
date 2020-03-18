@@ -5,7 +5,13 @@ import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { Badge } from "react-bootstrap";
 import Cart from "./Cart";
 
-const CartHeader = ({ products, total, totalItems, onCheckoutClicked }) => {
+const CartHeader = ({
+  products,
+  total,
+  totalItems,
+  onCheckoutClicked,
+  getQuantityById,
+}) => {
   return (
     <OverlayTrigger
       trigger="click"
@@ -17,6 +23,7 @@ const CartHeader = ({ products, total, totalItems, onCheckoutClicked }) => {
               products={products}
               total={total}
               onCheckoutClicked={onCheckoutClicked}
+              getQuantityById={getQuantityById}
             />
           </Popover.Content>
         </Popover>
