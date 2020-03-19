@@ -7,7 +7,7 @@ import CartContainer from "../containers/CartContainer";
 const Header = props => (
   <>
     <Navbar bg="primary" variant="dark" fixed="top">
-      <Navbar.Brand href="#home">Wu, Raulin & Co. Apparel</Navbar.Brand>
+      <Navbar.Brand href="#home">GC Fashion Store</Navbar.Brand>
       <Nav className="mr-auto" />
       <FilterContainer />
       <LoginContainer />

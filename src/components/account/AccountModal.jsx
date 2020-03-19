@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Button, Form } from "react-bootstrap";
+import { Modal, Button, Form, Col } from "react-bootstrap";
 
 const AccountModal = ({
   email,
@@ -19,7 +19,15 @@ const AccountModal = ({
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleSubmit = () => {
+  const handleSubmit = event => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    event.preventDefault();
+    event.stopPropagation();
     updateUserDetails({
       email,
       first_name: newFirstName,
@@ -41,47 +49,65 @@ const AccountModal = ({
           <Modal.Title>Account Details</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="Enter email"
-            value={email}
-            readOnly
-          />
-          <Form.Label>First Name</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Enter first name"
-            value={newFirstName}
-            onChange={e => setNewFirstName(e.target.value)}
-          />
-          <Form.Label>Last Name</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Enter last name"
-            value={newLastName}
-            onChange={e => setNewLastName(e.target.value)}
-          />
-          <Form.Label>Address</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Enter email"
-            value={newAddress}
-            onChange={e => setNewAddress(e.target.value)}
-          />
-          <Form.Label>Phone</Form.Label>
-          <Form.Control
-            type="tel"
-            placeholder="Enter phone number"
-            value={newPhone}
-            onChange={e => setNewPhone(e.target.value)}
-          />
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleSubmit}>
-            Submit
-          </Button>
+          <Form noValidate validated={validated} onSubmit={handleSubmit}>
+            <Form.Row>
+              <Form.Group as={Col} md="4" controlId="validationCustom01">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control
+                  type="email"
+                  placeholder="Enter email"
+                  value={email}
+                  readOnly
+                />
+              </Form.Group>
+              <Form.Group as={Col} md="4" controlId="validationCustom02">
+                <Form.Label>First Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter first name"
+                  value={newFirstName}
+                  onChange={e => setNewFirstName(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group as={Col} md="4" controlId="validationCustom03">
+                <Form.Label>Last Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter last name"
+                  value={newLastName}
+                  onChange={e => setNewLastName(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group as={Col} md="4" controlId="validationCustom04">
+                <Form.Label>Address</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter email"
+                  value={newAddress}
+                  onChange={e => setNewAddress(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group as={Col} md="4" controlId="validationCustom05">
+                <Form.Label>Phone</Form.Label>
+                <Form.Control
+                  type="tel"
+                  placeholder="Enter phone number"
+                  value={newPhone}
+                  onChange={e => setNewPhone(e.target.value)}
+                />
+              </Form.Group>
+            </Form.Row>
+            <Button
+              variant="secondary"
+              // onClick={handleClose}
+              type="submit"
+            >
+              Close
+            </Button>
+            <Button variant="primary" onClick={handleSubmit}>
+              Submit
+            </Button>
+          </Form>
         </Modal.Body>
       </Modal>
     </>
