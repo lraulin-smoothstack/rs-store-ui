@@ -14,6 +14,9 @@ const App = ({ recoverLogin }) => {
         <Route path="/test">
           <h1>Test</h1>
         </Route>
+        <Route path="/foo">
+          <h1>Foo</h1>
+        </Route>
         <Route path="/">
           <Header />
           <ProductsContainer />
