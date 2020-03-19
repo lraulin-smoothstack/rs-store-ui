@@ -3,24 +3,20 @@ import ProductsContainer from "./ProductsContainer";
 import Header from "../components/Header";
 import { connect } from "react-redux";
 import { recoverLogin } from "../actions";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
+import { ManagementRoutes } from "../components/management/ManagementRoutes";
 
 const App = ({ recoverLogin }) => {
   recoverLogin();
 
   return (
     <div>
+      <Header />
       <Switch>
-        <Route path="/test">
-          <h1>Test</h1>
-        </Route>
-        <Route path="/foo">
-          <h1>Foo</h1>
-        </Route>
-        <Route path="/">
-          <Header />
+        <Route exact path="/">
           <ProductsContainer />
         </Route>
+        <ManagementRoutes />
       </Switch>
     </div>
   );
