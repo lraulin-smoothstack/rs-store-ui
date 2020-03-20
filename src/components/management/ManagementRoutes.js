@@ -86,14 +86,13 @@ class ManagementRoutes extends React.Component {
   }
 
   render() {
-    console.log("<<<<<<<<<<<<<<<<ROLE>>>>>>>>>>>>>>>>>>>");
-    console.log(this.props.role);
     return (
       <>
         <Route
           path="/products"
           render={props =>
-            this.props.role === 2 || this.props.role === 4 ? (
+            // eslint-disable-next-line
+            this.props.role == 2 || this.props.role == 4 ? (
               <ProductList {...props} product={this.state.product} />
             ) : (
               <Redirect to="/" />
@@ -103,7 +102,8 @@ class ManagementRoutes extends React.Component {
         <Route
           path="/coupons"
           render={props =>
-            this.props.role === 2 || this.props.role === 4 ? (
+            // eslint-disable-next-line
+            this.props.role == 2 || this.props.role == 4 ? (
               <CouponList {...props} coupon={this.state.coupon} />
             ) : (
               <Redirect to="/" />
@@ -113,7 +113,8 @@ class ManagementRoutes extends React.Component {
         <Route
           path="/taxes"
           render={props =>
-            this.props.role >= 3 ? (
+            // eslint-disable-next-line
+            this.props.role == 3 || this.props.role == 4 ? (
               <Taxes {...props} taxes={this.state.taxes} />
             ) : (
               <Redirect to="/" />
@@ -123,7 +124,8 @@ class ManagementRoutes extends React.Component {
         <Route
           path="/reports"
           render={props =>
-            this.props.role >= 3 ? (
+            // eslint-disable-next-line
+            this.props.role == 3 || this.props.role == 4 ? (
               <Reports {...props} report={this.state.report} />
             ) : (
               <Redirect to="/" />
