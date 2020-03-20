@@ -33,24 +33,32 @@ const WelcomeHeader = ({
                 updateUserDetails={updateUserDetails}
               />
               {(role == 2 || role == 4) && (
-                <Link to="/products">
-                  <Button variant="primary">Products</Button>
-                </Link>
+                <Button variant="primary">
+                  <Link to="/products" style={{ color: "white" }}>
+                    Products
+                  </Link>
+                </Button>
               )}
               {(role == 2 || role == 4) && (
-                <Link to="/coupons">
-                  <Button variant="primary">Coupons</Button>
-                </Link>
+                <Button variant="primary">
+                  <Link to="/coupons" style={{ color: "white" }}>
+                    Coupons
+                  </Link>
+                </Button>
               )}
               {(role == 3 || role == 4) && (
-                <Link to="/taxes">
-                  <Button variant="primary">Taxes</Button>
-                </Link>
+                <Button variant="primary">
+                  <Link to="/taxes" style={{ color: "white" }}>
+                    Taxes
+                  </Link>
+                </Button>
               )}
               {(role == 3 || role == 4) && (
-                <Link to="/reports">
-                  <Button variant="primary">Reports</Button>
-                </Link>
+                <Button variant="primary">
+                  <Link to="/reports" style={{ color: "white" }}>
+                    Reports
+                  </Link>
+                </Button>
               )}
               <Button
                 variant="danger"
