@@ -14,6 +14,7 @@ import {
   getEmail,
   getAddress,
   getPhone,
+  getRole,
 } from "../reducers";
 import WelcomeHeader from "../components/account/WelcomeHeader";
 
@@ -28,6 +29,7 @@ const LoginContainer = ({
   recoverLogin,
   register,
   updateUserDetails,
+  role,
 }) => {
   useEffect(() => {
     if (!email) recoverLogin();
@@ -44,6 +46,7 @@ const LoginContainer = ({
           phone={phone}
           logout={logout}
           updateUserDetails={updateUserDetails}
+          role={role}
         />
       ) : (
         <LoginHeader login={login} register={register} />
@@ -58,6 +61,7 @@ const mapStateToProps = state => ({
   last_name: getLastName(state),
   address: getAddress(state),
   phone: getPhone(state),
+  role: getRole(state),
 });
 
 const mapDispatchToProps = {
