@@ -127,14 +127,14 @@ class CouponForm extends React.Component {
             onChange={this.handleInputChange}
             value={this.state.discount === null ? "" : this.state.discount}
           />
-          {this.state.discount != undefined && (
+          {this.state.discount !== undefined && (
             <span className="error">{errors.discount}</span>
           )}
         </FormGroup>
         <Button
           color="primary"
           onClick={
-            this.props.new == true ? this.handleCreate : this.handleUpdate
+            this.props.new === true ? this.handleCreate : this.handleUpdate
           }
           disabled={this.state.submitDisabled}
         >

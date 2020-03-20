@@ -220,7 +220,7 @@ class ProductForm extends React.Component {
                 : this.state.wholesale_price_cents
             }
           />
-          {this.state.wholesale_price_cents != undefined && (
+          {this.state.wholesale_price_cents !== undefined && (
             <span className="error">{errors.wholesale_price_cents}</span>
           )}
         </FormGroup>
@@ -237,7 +237,7 @@ class ProductForm extends React.Component {
                 : this.state.retail_price_cents
             }
           />
-          {this.state.retail_price_cents != undefined && (
+          {this.state.retail_price_cents !== undefined && (
             <span className="error">{errors.retail_price_cents}</span>
           )}
         </FormGroup>
@@ -250,7 +250,7 @@ class ProductForm extends React.Component {
             onChange={this.handleInputChange}
             value={this.state.stock === null ? "" : this.state.stock}
           />
-          {this.state.stock != undefined && (
+          {this.state.stock !== undefined && (
             <span className="error">{errors.stock}</span>
           )}
         </FormGroup>
