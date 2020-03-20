@@ -1,7 +1,5 @@
-"use strict";
-
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 
 import { ProductList } from "./ProductList";
 import { CouponList } from "./CouponList";
@@ -11,8 +9,10 @@ import { Reports } from "./Reports";
 import ProductStore from "../../flux/stores/productStore";
 import CouponStore from "../../flux/stores/couponStore";
 import OrderStore from "../../flux/stores/orderStore";
+import { connect } from "react-redux";
+import { getRole } from "../../reducers";
 
-export class ManagementRoutes extends React.Component {
+class ManagementRoutes extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -86,25 +86,49 @@ export class ManagementRoutes extends React.Component {
   }
 
   render() {
+    console.log("<<<<<<<<<<<<<<<<ROLE>>>>>>>>>>>>>>>>>>>");
+    console.log(this.props.role);
     return (
       <>
         <Route
           path="/products"
-          render={props => (
-            <ProductList {...props} product={this.state.product} />
-          )}
+          render={props =>
+            this.props.role === 2 || this.props.role === 4 ? (
+              <ProductList {...props} product={this.state.product} />
+            ) : (
+              <Redirect to="/" />
+            )
+          }
         />
         <Route
           path="/coupons"
-          render={props => <CouponList {...props} coupon={this.state.coupon} />}
+          render={props =>
+            this.props.role === 2 || this.props.role === 4 ? (
+              <CouponList {...props} coupon={this.state.coupon} />
+            ) : (
+              <Redirect to="/" />
+            )
+          }
         />
         <Route
           path="/taxes"
-          render={props => <Taxes {...props} taxes={this.state.taxes} />}
+          render={props =>
+            this.props.role >= 3 ? (
+              <Taxes {...props} taxes={this.state.taxes} />
+            ) : (
+              <Redirect to="/" />
+            )
+          }
         />
         <Route
           path="/reports"
-          render={props => <Reports {...props} report={this.state.report} />}
+          render={props =>
+            this.props.role >= 3 ? (
+              <Reports {...props} report={this.state.report} />
+            ) : (
+              <Redirect to="/" />
+            )
+          }
         />
       </>
     );
@@ -141,3 +165,9 @@ export class ManagementRoutes extends React.Component {
     this.setState({ taxes: OrderStore.getAllTaxes() });
   }
 }
+
+const mapStateToProps = state => ({
+  role: getRole(state),
+});
+
+export default connect(mapStateToProps)(ManagementRoutes);

@@ -18,9 +18,9 @@ class ModalForm extends React.Component {
   }
 
   handleDelete() {
-    if (this.props.type == "Product") {
+    if (this.props.type === "Product") {
       ProductActions.deleteProduct(this.props.id);
-    } else if (this.props.type == "Coupon") {
+    } else if (this.props.type === "Coupon") {
       CouponActions.deleteCoupon(this.props.code);
     }
     // } else if (this.state.type == "User") {
@@ -82,13 +82,13 @@ class ModalForm extends React.Component {
         </Button>
       );
       modal_title = "Edit " + this.props.type;
-      if (this.props.type == "Product") {
+      if (this.props.type === "Product") {
         content = (
           <ModalBody>
             <ProductForm toggle={this.toggle} item={this.props.item} />
           </ModalBody>
         );
-      } else if (this.props.type == "Coupon") {
+      } else if (this.props.type === "Coupon") {
         content = (
           <ModalBody>
             <CouponForm toggle={this.toggle} item={this.props.item} />
