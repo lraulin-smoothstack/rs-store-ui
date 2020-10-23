@@ -1,4 +1,7 @@
-const API_URL = "https://zr8lc1a181.execute-api.us-east-1.amazonaws.com/dev";
+import mockData from "./mockData";
+
+// const API_URL = "https://zr8lc1a181.execute-api.us-east-1.amazonaws.com/dev";
+const API_URL = "http://localhost:8080";
 
 const createOrder = ({
   product_id = 0,
@@ -17,14 +20,14 @@ const createOrder = ({
   deleted: 0,
 });
 
-const get = async url => {
-  try {
-    const result = await fetch(url);
-    return await result.json();
-  } catch (e) {
-    console.log(e);
-  }
-};
+// const get = async (url) => {
+//   try {
+//     const result = await fetch(url);
+//     return await result.json();
+//   } catch (e) {
+//     console.log(e);
+//   }
+// };
 
 const post = async (url, data) => {
   try {
@@ -60,9 +63,17 @@ const placeOrder = async ({ product_id, user_id, coupon_code, quantity }) => {
 
 export default {
   getProducts: async () => {
-    return await get(API_URL + "/products");
+    // return await get(API_URL + "/products");
+    // return new Promise((resolve, reject) => {
+
+    //   setTimeout(function () {
+    //     resolve(products); // Yay! Everything went well!
+    //   }, 0);
+    // });
+    // TEMP for demo purposes
+    return mockData;
   },
-  buyProducts: payload => {
+  buyProducts: (payload) => {
     for (let item of payload) {
       placeOrder({
         product_id: item.product_id,
@@ -73,44 +84,21 @@ export default {
     }
   },
   login: async ({ email, password }) => {
-    return await post(API_URL + "/login", { email, password });
+    return await post(API_URL + "/users/login", { username: email, password });
   },
   register: async ({ email, password }) => {
-    return await post(API_URL + "/register", { email, password });
+    return await post(API_URL + "/users/register", {
+      username: email,
+      password,
+    });
   },
-  updateUser: async ({
-    id,
-    email,
-    first_name,
-    last_name,
-    address,
-    phone,
-    jwt,
-  }) => {
+  updateUser: async ({ id, email, jwt }) => {
     console.log("updateUser API call");
-    console.log(
-      id +
-        " " +
-        email +
-        " " +
-        first_name +
-        " " +
-        last_name +
-        " " +
-        address +
-        " " +
-        phone +
-        " " +
-        jwt,
-    );
+    console.log(id + " " + email + " " + jwt);
     try {
       const url = `${API_URL}/users/${id}`;
       const body = {
-        email,
-        first_name: first_name,
-        last_name: last_name,
-        address,
-        phone,
+        username: email,
       };
       return await putWithToken(url, body, jwt);
     } catch (e) {

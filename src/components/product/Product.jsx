@@ -8,7 +8,7 @@ const Product = ({
   name = "[Product Name]",
   description = "[Description]",
   department = "[Department Name]",
-  photo_url = "http://placekitten.com/200/200?image=",
+  photo_url = "http://placekitten.com/200/200?image=" + (id % 16),
   retail_price_cents = 0,
 }) => {
   const badgeVariant = {
@@ -18,7 +18,7 @@ const Product = ({
   };
   return (
     <Card>
-      <Card.Img variant="top" src={photo_url + (id % 16)} />
+      <Card.Img variant="top" src={photo_url} />
       <Card.Body>
         <Card.Title>{name}</Card.Title>
         <Card.Text>

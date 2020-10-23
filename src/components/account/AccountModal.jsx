@@ -10,7 +10,7 @@ const AccountModal = ({
   updateUserDetails,
 }) => {
   const [show, setShow] = useState(false);
-  const [validated, setValidated] = useState(false);
+  const [validated, _] = useState(false);
   const [newFirstName, setNewFirstName] = useState(first_name || "");
   const [newLastName, setNewLastName] = useState(last_name || "");
   const [newAddress, setNewAddress] = useState(address || "");
@@ -19,7 +19,7 @@ const AccountModal = ({
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -66,7 +66,7 @@ const AccountModal = ({
                   type="text"
                   placeholder="Enter first name"
                   value={newFirstName}
-                  onChange={e => setNewFirstName(e.target.value)}
+                  onChange={(e) => setNewFirstName(e.target.value)}
                 />
               </Form.Group>
               <Form.Group as={Col} md="4" controlId="validationCustom03">
@@ -75,7 +75,7 @@ const AccountModal = ({
                   type="text"
                   placeholder="Enter last name"
                   value={newLastName}
-                  onChange={e => setNewLastName(e.target.value)}
+                  onChange={(e) => setNewLastName(e.target.value)}
                 />
               </Form.Group>
               <Form.Group as={Col} md="4" controlId="validationCustom04">
@@ -84,7 +84,7 @@ const AccountModal = ({
                   type="text"
                   placeholder="Enter email"
                   value={newAddress}
-                  onChange={e => setNewAddress(e.target.value)}
+                  onChange={(e) => setNewAddress(e.target.value)}
                 />
               </Form.Group>
               <Form.Group as={Col} md="4" controlId="validationCustom05">
@@ -93,7 +93,7 @@ const AccountModal = ({
                   type="tel"
                   placeholder="Enter phone number"
                   value={newPhone}
-                  onChange={e => setNewPhone(e.target.value)}
+                  onChange={(e) => setNewPhone(e.target.value)}
                 />
               </Form.Group>
             </Form.Row>

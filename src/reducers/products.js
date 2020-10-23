@@ -23,26 +23,28 @@ const initialState = {
 
 const getVisibleIds = (productsById, department, searchString) => {
   let products = Object.values(productsById);
-  if (department) products = products.filter(p => p.department === department);
+  if (department)
+    products = products.filter((p) => p.department === department);
   if (searchString)
     products = products.filter(
-      p =>
+      (p) =>
         p.name.toLowerCase().includes(searchString.toLowerCase()) ||
-        p.description.toLowerCase().includes(searchString.toLowerCase()),
+        p.description.toLowerCase().includes(searchString.toLowerCase())
     );
-  return products.map(p => p.id);
+  return products.map((p) => p.id);
 };
 
 const productReducer = (state = initialState, action) => {
   switch (action.type) {
     case RECEIVE_PRODUCTS:
+      const products = action.products || [];
       return {
         ...state,
-        byId: action.products.reduce((obj, product) => {
+        byId: products.reduce((obj, product) => {
           obj[product.id] = product;
           return obj;
         }, {}),
-        visibleIds: action.products.map(product => product.id),
+        visibleIds: products.map((product) => product.id),
       };
     case SET_DEPARTMENT:
       return {
@@ -50,7 +52,7 @@ const productReducer = (state = initialState, action) => {
         visibleIds: getVisibleIds(
           state.byId,
           action.department,
-          action.prevFilter.searchString,
+          action.prevFilter.searchString
         ),
       };
     case SET_SEARCH_STRING:
@@ -59,7 +61,7 @@ const productReducer = (state = initialState, action) => {
         visibleIds: getVisibleIds(
           state.byId,
           action.prevFilter.department,
-          action.searchString,
+          action.searchString
         ),
       };
     default:
@@ -71,5 +73,5 @@ export default productReducer;
 
 export const getProduct = (state, id) => state.byId[id];
 
-export const getVisibleProducts = state =>
-  state.visibleIds.map(id => getProduct(state, id));
+export const getVisibleProducts = (state) =>
+  state.visibleIds.map((id) => getProduct(state, id));

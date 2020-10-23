@@ -33,7 +33,7 @@ const LoginContainer = ({
 }) => {
   useEffect(() => {
     if (!email) recoverLogin();
-  }, [email]);
+  }, [email, recoverLogin]);
 
   return (
     <>
@@ -55,7 +55,7 @@ const LoginContainer = ({
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   email: getEmail(state),
   first_name: getFirstName(state),
   last_name: getLastName(state),

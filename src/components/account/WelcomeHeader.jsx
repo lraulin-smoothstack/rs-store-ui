@@ -14,7 +14,7 @@ const WelcomeHeader = ({
   updateUserDetails,
   role,
 }) => {
-  const extractUsername = email => email.substr(0, email.indexOf("@"));
+  const extractUsername = (email) => email.substr(0, email.indexOf("@"));
 
   return (
     <OverlayTrigger
@@ -32,28 +32,28 @@ const WelcomeHeader = ({
                 phone={phone}
                 updateUserDetails={updateUserDetails}
               />
-              {(role == 2 || role == 4) && (
+              {(role === 2 || role === 4) && (
                 <Button variant="primary">
                   <Link to="/products" style={{ color: "white" }}>
                     Products
                   </Link>
                 </Button>
               )}
-              {(role == 2 || role == 4) && (
+              {(role === 2 || role === 4) && (
                 <Button variant="primary">
                   <Link to="/coupons" style={{ color: "white" }}>
                     Coupons
                   </Link>
                 </Button>
               )}
-              {(role == 3 || role == 4) && (
+              {(role === 3 || role === 4) && (
                 <Button variant="primary">
                   <Link to="/taxes" style={{ color: "white" }}>
                     Taxes
                   </Link>
                 </Button>
               )}
-              {(role == 3 || role == 4) && (
+              {(role === 3 || role === 4) && (
                 <Button variant="primary">
                   <Link to="/reports" style={{ color: "white" }}>
                     Reports
