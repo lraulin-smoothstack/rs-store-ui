@@ -1,35 +1,35 @@
 import shop from "../api/shop";
 import * as types from "../constants/ActionTypes";
 
-const receiveProducts = products => ({
+const receiveProducts = (products) => ({
   type: types.RECEIVE_PRODUCTS,
   products,
 });
 
-export const getAllProducts = () => dispatch => {
-  shop.getProducts().then(products => {
+export const getAllProducts = () => (dispatch) => {
+  shop.getProducts().then((products) => {
     dispatch(receiveProducts(products));
   });
 };
 
-const addToCartUnsafe = productId => ({
+const addToCartUnsafe = (productId) => ({
   type: types.ADD_TO_CART,
   productId,
 });
 
-export const addToCart = productId => (dispatch, getState) => {
+export const addToCart = (productId) => (dispatch, getState) => {
   if (getState().products.byId[productId].stock > 0) {
     dispatch(addToCartUnsafe(productId));
   }
 };
 
-export const checkout = products => (dispatch, getState) => {
+export const checkout = (products) => (dispatch, getState) => {
   const { cart, user } = getState();
   dispatch({
     type: types.CHECKOUT_REQUEST,
   });
 
-  const orders = cart.addedIds.map(productId => ({
+  const orders = cart.addedIds.map((productId) => ({
     id: user.id,
     product_id: productId,
     quantity: cart.quantityById[productId],
@@ -44,29 +44,33 @@ export const checkout = products => (dispatch, getState) => {
   });
 };
 
-export const setDepartment = department => dispatch => {
+export const setDepartment = (department) => (dispatch) => {
   dispatch({
     type: types.SET_DEPARTMENT,
     department,
   });
 };
 
-export const setSearchString = searchString => dispatch => {
+export const setSearchString = (searchString) => (dispatch) => {
   dispatch({
     type: types.SET_SEARCH_STRING,
     searchString,
   });
 };
 
-const storeAllLocally = object => {
-  for (const [key, value] of Object.entries(object)) {
-    localStorage.setItem(key, value);
+const storeAllLocally = (object) => {
+  if (object) {
+    for (const [key, value] of Object.entries(object)) {
+      localStorage.setItem(key, value);
+    }
   }
 };
 
-export const login = ({ email, password }) => dispatch => {
-  shop.login({ email, password }).then(userDetails => {
+export const login = ({ email, password }) => (dispatch) => {
+  shop.login({ email, password }).then((userDetails) => {
     console.log("LOGIN");
+    console.log("email: " + email);
+    console.log("password: " + password);
     console.log(userDetails);
     storeAllLocally(userDetails);
 
@@ -77,8 +81,8 @@ export const login = ({ email, password }) => dispatch => {
   });
 };
 
-export const register = ({ email, password }) => dispatch => {
-  shop.register({ email, password }).then(userDetails => {
+export const register = ({ email, password }) => (dispatch) => {
+  shop.register({ email, password }).then((userDetails) => {
     storeAllLocally(userDetails);
 
     dispatch({
@@ -99,12 +103,12 @@ const userFields = [
   "jwt",
 ];
 
-export const logout = () => dispatch => {
-  userFields.forEach(x => localStorage.removeItem(x));
+export const logout = () => (dispatch) => {
+  userFields.forEach((x) => localStorage.removeItem(x));
   dispatch({ type: types.LOGOUT });
 };
 
-export const recoverLogin = () => dispatch => {
+export const recoverLogin = () => (dispatch) => {
   const userDetails = userFields.reduce((object, key) => {
     object[key] = localStorage.getItem(key);
     return object;
@@ -132,7 +136,7 @@ export const updateUserDetails = ({
   console.log("CALLING UPDATE USER FROM ACTIONS");
   shop
     .updateUser({ id, email, first_name, last_name, address, phone, jwt })
-    .then(response => {
+    .then((response) => {
       if (response && response.affectedRows) {
         console.log("User successfully updated!");
         localStorage.setItem("id", id);
@@ -160,7 +164,7 @@ export const updateUserDetails = ({
     });
 };
 
-export const updateQuantity = (itemId, quantity) => dispatch => {
+export const updateQuantity = (itemId, quantity) => (dispatch) => {
   dispatch({
     type: types.UPDATE_QUANTITY,
     itemId,
@@ -168,7 +172,7 @@ export const updateQuantity = (itemId, quantity) => dispatch => {
   });
 };
 
-export const removeItem = itemId => dispatch => {
+export const removeItem = (itemId) => (dispatch) => {
   dispatch({
     type: types.REMOVE_ITEM,
     itemId,

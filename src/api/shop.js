@@ -20,14 +20,14 @@ const createOrder = ({
   deleted: 0,
 });
 
-// const get = async (url) => {
-//   try {
-//     const result = await fetch(url);
-//     return await result.json();
-//   } catch (e) {
-//     console.log(e);
-//   }
-// };
+const get = async (url) => {
+  try {
+    const result = await fetch(url);
+    return await result.json();
+  } catch (e) {
+    console.log(e);
+  }
+};
 
 const post = async (url, data) => {
   try {
@@ -58,20 +58,15 @@ const putWithToken = async (url, data, token) => {
 
 const placeOrder = async ({ product_id, user_id, coupon_code, quantity }) => {
   const order = createOrder({ product_id, user_id, coupon_code, quantity });
+  console.log("PLACING ORDER:");
+  console.log(JSON.stringify(order));
   return await post(API_URL + "/orders", order);
 };
 
 export default {
   getProducts: async () => {
-    // return await get(API_URL + "/products");
-    // return new Promise((resolve, reject) => {
-
-    //   setTimeout(function () {
-    //     resolve(products); // Yay! Everything went well!
-    //   }, 0);
-    // });
-    // TEMP for demo purposes
-    return mockData;
+    const res = await get(API_URL + "/products");
+    return res.map((x) => ({ ...x, id: x._id }));
   },
   buyProducts: (payload) => {
     for (let item of payload) {
@@ -84,7 +79,15 @@ export default {
     }
   },
   login: async ({ email, password }) => {
-    return await post(API_URL + "/users/login", { username: email, password });
+    try {
+      const res = await post(API_URL + "/users/login", {
+        username: email,
+        password,
+      });
+      return { email, jwt: res.token };
+    } catch (e) {
+      console.log(e);
+    }
   },
   register: async ({ email, password }) => {
     return await post(API_URL + "/users/register", {

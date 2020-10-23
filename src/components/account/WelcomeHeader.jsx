@@ -14,7 +14,10 @@ const WelcomeHeader = ({
   updateUserDetails,
   role,
 }) => {
-  const extractUsername = (email) => email.substr(0, email.indexOf("@"));
+  const extractUsername = (email) =>
+    /(.+)@(.+){2,}\.(.+){2,}/.test(email)
+      ? email.substr(0, email.indexOf("@"))
+      : email;
 
   return (
     <OverlayTrigger
