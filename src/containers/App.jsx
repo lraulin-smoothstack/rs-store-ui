@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import { connect } from "react-redux";
 import { recoverLogin } from "../actions";
 import { Switch, Route } from "react-router-dom";
-import ManagementRoutes from "../components/management/ManagementRoutes";
+import CheckoutContainer from "./CheckoutContainer";
 
 const App = ({ recoverLogin }) => {
   recoverLogin();
@@ -16,7 +16,9 @@ const App = ({ recoverLogin }) => {
         <Route exact path="/">
           <ProductsContainer />
         </Route>
-        <ManagementRoutes />
+        <Route exact path="/checkout">
+          <CheckoutContainer />
+        </Route>
       </Switch>
     </div>
   );

@@ -1,7 +1,4 @@
-import mockData from "./mockData";
-
-// const API_URL = "https://zr8lc1a181.execute-api.us-east-1.amazonaws.com/dev";
-const API_URL = "http://localhost:8080";
+const API_URL = "http://localhost:3000";
 
 const createOrder = ({
   product_id = 0,
@@ -66,7 +63,7 @@ const placeOrder = async ({ product_id, user_id, coupon_code, quantity }) => {
 export default {
   getProducts: async () => {
     const res = await get(API_URL + "/products");
-    return res.map((x) => ({ ...x, id: x._id }));
+    return res ? res.map((x) => ({ ...x, id: x._id })) : [];
   },
   buyProducts: (payload) => {
     for (let item of payload) {

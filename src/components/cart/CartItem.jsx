@@ -13,7 +13,6 @@ const CartItem = ({
   updateQuantity,
 }) => {
   const quantity = getQuantityById(id);
-  console.log(quantity);
   return (
     <tr>
       <td>{name}</td>
@@ -21,7 +20,7 @@ const CartItem = ({
         <Form.Control
           type="number"
           value={quantity}
-          onChange={e =>
+          onChange={(e) =>
             e.target.value > 0 ? updateQuantity(id, e.target.value) : null
           }
         />

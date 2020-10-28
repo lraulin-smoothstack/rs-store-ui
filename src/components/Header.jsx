@@ -5,10 +5,12 @@ import LoginContainer from "../containers/LoginContainer";
 import CartContainer from "../containers/CartContainer";
 import { Link } from "react-router-dom";
 
-const Header = props => (
+const Header = (props) => (
   <>
     <Navbar bg="primary" variant="dark" fixed="top">
-      <Navbar.Brand href="#home">GC Fashion Store</Navbar.Brand>
+      <Link to="/">
+        <Navbar.Brand>GC Fashion Store</Navbar.Brand>
+      </Link>
       <Nav className="mr-auto" />
       <Link to="/" replace>
         Home
