@@ -1,66 +1,14 @@
 import React, { useState } from "react";
+import { states } from "../../constants";
 
-const states = {
-  AL: "Alabama",
-  AK: "Alaska",
-  AZ: "Arizona",
-  AR: "Arkansas",
-  CA: "California",
-  CO: "Colorado",
-  CT: "Connecticut",
-  DE: "Delaware",
-  DC: "District Of Columbia",
-  FL: "Florida",
-  GA: "Georgia",
-  HI: "Hawaii",
-  ID: "Idaho",
-  IL: "Illinois",
-  IN: "Indiana",
-  IA: "Iowa",
-  KS: "Kansas",
-  KY: "Kentucky",
-  LA: "Louisiana",
-  ME: "Maine",
-  MD: "Maryland",
-  MA: "Massachusetts",
-  MI: "Michigan",
-  MN: "Minnesota",
-  MS: "Mississippi",
-  MO: "Missouri",
-  MT: "Montana",
-  NE: "Nebraska",
-  NV: "Nevada",
-  NH: "New Hampshire",
-  NJ: "New Jersey",
-  NM: "New Mexico",
-  NY: "New York",
-  NC: "North Carolina",
-  ND: "North Dakota",
-  OH: "Ohio",
-  OK: "Oklahoma",
-  OR: "Oregon",
-  PA: "Pennsylvania",
-  RI: "Rhode Island",
-  SC: "South Carolina",
-  SD: "South Dakota",
-  TN: "Tennessee",
-  TX: "Texas",
-  UT: "Utah",
-  VT: "Vermont",
-  VA: "Virginia",
-  WA: "Washington",
-  WV: "West Virginia",
-  WI: "Wisconsin",
-  WY: "Wyoming",
-};
-
-const Address = () => {
+const Address = ({ address }) => {
   const [data, setData] = useState({
-    street: "",
-    city: "",
-    state: "",
-    zip: "",
+    street: address.street || "",
+    city: address.city || "",
+    state: address.state || "",
+    zip: address.zip || "",
   });
+  console.log("ADDRESS", address);
   const handleInputChange = (e) => {
     setData({
       ...data,
@@ -76,24 +24,29 @@ const Address = () => {
           type="text"
           name="street"
           placeholder="Street Address"
+          value={data.street}
           onChange={handleInputChange}
         />
         <input
           type="text"
           name="city"
           placeholder="City"
+          value={data.city}
           onChange={handleInputChange}
         />
         <select value={data.state} name="state" onChange={handleInputChange}>
           <option value={""}>Select Your State</option>
           {Object.entries(states).map(([abbreviation, state]) => (
-            <option value={abbreviation}>{state}</option>
+            <option value={abbreviation} key={abbreviation}>
+              {state}
+            </option>
           ))}
         </select>
         <input
           type="text"
           name="zip"
           placeholder="Zip"
+          value={data.zip}
           onChange={handleInputChange}
         />
       </form>

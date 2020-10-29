@@ -4,7 +4,7 @@ import {
   CHECKOUT_FAILURE,
   UPDATE_QUANTITY,
   REMOVE_ITEM,
-} from "../constants/ActionTypes";
+} from "../constants";
 
 const initialState = {
   addedIds: [],
@@ -20,7 +20,7 @@ const addedIds = (state = initialState.addedIds, action) => {
       return [...state, action.productId];
     }
     case REMOVE_ITEM: {
-      return state.filter(x => x !== action.itemId);
+      return state.filter((x) => x !== action.itemId);
     }
     default:
       return state;
@@ -51,7 +51,7 @@ const quantityById = (state = initialState.quantityById, action) => {
 export const getQuantity = (state, productId) =>
   state.quantityById[productId] || 0;
 
-export const getAddedIds = state => state.addedIds;
+export const getAddedIds = (state) => state.addedIds;
 
 const cart = (state = initialState, action) => {
   switch (action.type) {

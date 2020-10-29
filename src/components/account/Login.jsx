@@ -1,24 +1,24 @@
 import React from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 
-const Login = ({ login, email, setEmail, password, setPassword }) => {
-  const handleSubmit = event => {
+const Login = ({ login, username, setusername, password, setPassword }) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    login({ email, password });
+    login({ username, password });
   };
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Form.Group as={Row} controlId="formPlaintextEmail">
+      <Form.Group as={Row} controlId="formPlaintextusername">
         {/* <Form.Label column sm="2"> */}
         <Col sm="10">
-          <Form.Label>Email</Form.Label>
+          <Form.Label>username</Form.Label>
           <Form.Control
             plaintext
-            placeholder="email@example.com"
-            value={email}
-            onChange={event => setEmail(event.target.value)}
+            placeholder="username@example.com"
+            value={username}
+            onChange={(event) => setusername(event.target.value)}
           />
         </Col>
       </Form.Group>
@@ -30,7 +30,7 @@ const Login = ({ login, email, setEmail, password, setPassword }) => {
             type="password"
             placeholder="Password"
             value={password}
-            onChange={event => setPassword(event.target.value)}
+            onChange={(event) => setPassword(event.target.value)}
           />
         </Col>
       </Form.Group>

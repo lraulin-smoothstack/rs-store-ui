@@ -2,16 +2,22 @@ import React, { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { Alert } from "react-bootstrap";
 
-const Register = ({ register, email, setEmail, password, setPassword }) => {
+const Register = ({
+  register,
+  username,
+  setusername,
+  password,
+  setPassword,
+}) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordMismatch, setPasswordMismatch] = useState(false);
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     event.stopPropagation();
     if (password === confirmPassword) {
       setPasswordMismatch(false);
-      register({ email, password });
+      register({ username, password });
     } else {
       setPasswordMismatch(true);
     }
@@ -19,14 +25,14 @@ const Register = ({ register, email, setEmail, password, setPassword }) => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Form.Group as={Row} controlId="formRegisterPlaintextEmail">
+      <Form.Group as={Row} controlId="formRegisterPlaintextusername">
         <Col sm="10">
-          <Form.Label>Email</Form.Label>
+          <Form.Label>username</Form.Label>
           <Form.Control
             plaintext
-            placeholder="email@example.com"
-            value={email}
-            onChange={event => setEmail(event.target.value)}
+            placeholder="username@example.com"
+            value={username}
+            onChange={(event) => setusername(event.target.value)}
           />
         </Col>
       </Form.Group>
@@ -38,7 +44,7 @@ const Register = ({ register, email, setEmail, password, setPassword }) => {
             type="password"
             placeholder="Password"
             value={password}
-            onChange={event => setPassword(event.target.value)}
+            onChange={(event) => setPassword(event.target.value)}
           />
         </Col>
       </Form.Group>
@@ -49,7 +55,7 @@ const Register = ({ register, email, setEmail, password, setPassword }) => {
             type="password"
             placeholder="Confirm Password"
             value={confirmPassword}
-            onChange={event => setConfirmPassword(event.target.value)}
+            onChange={(event) => setConfirmPassword(event.target.value)}
           />
         </Col>
       </Form.Group>

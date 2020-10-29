@@ -4,7 +4,7 @@ import Login from "./Login";
 import Register from "./Register";
 
 const LoginHeader = ({ login, register }) => {
-  const [email, setEmail] = useState("");
+  const [username, setusername] = useState("");
   const [password, setPassword] = useState("");
   const [loginOrRegister, setLoginOrRegister] = useState("login");
 
@@ -18,23 +18,23 @@ const LoginHeader = ({ login, register }) => {
             <Tabs
               id="controlled-tab-example"
               activeKey={loginOrRegister}
-              onSelect={k => setLoginOrRegister(k)}
+              onSelect={(k) => setLoginOrRegister(k)}
             >
               <Tab eventKey="login" title="Log In">
                 <Login
                   login={login}
-                  email={email}
+                  username={username}
                   password={password}
-                  setEmail={setEmail}
+                  setusername={setusername}
                   setPassword={setPassword}
                 />
               </Tab>
               <Tab eventKey="register" title="Register">
                 <Register
                   register={register}
-                  email={email}
+                  username={username}
                   password={password}
-                  setEmail={setEmail}
+                  setusername={setusername}
                   setPassword={setPassword}
                 />
               </Tab>

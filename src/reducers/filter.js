@@ -1,8 +1,4 @@
-import {
-  SET_DEPARTMENT,
-  SET_SEARCH_STRING,
-  UPDATE_FILTER,
-} from "../constants/ActionTypes";
+import { SET_DEPARTMENT, SET_SEARCH_STRING, UPDATE_FILTER } from "../constants";
 
 const initialState = {
   department: null,
@@ -29,9 +25,9 @@ const searchString = (state = initialState.searchString, action) => {
   }
 };
 
-export const getDepartment = state => state.department;
+export const getDepartment = (state) => state.department;
 
-export const getSearchString = state => state.searchString;
+export const getSearchString = (state) => state.searchString;
 
 const filter = (state = initialState, action) => {
   switch (action.type) {

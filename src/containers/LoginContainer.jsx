@@ -8,45 +8,28 @@ import {
   logout,
   updateUserDetails,
 } from "../actions";
-import {
-  getFirstName,
-  getLastName,
-  getEmail,
-  getAddress,
-  getPhone,
-  getRole,
-} from "../reducers";
+import { getUser } from "../reducers";
 import WelcomeHeader from "../components/account/WelcomeHeader";
 
 const LoginContainer = ({
-  address,
-  email,
-  first_name,
-  last_name,
+  user,
   login,
   logout,
-  phone,
   recoverLogin,
   register,
   updateUserDetails,
-  role,
 }) => {
   useEffect(() => {
-    if (!email) recoverLogin();
-  }, [email, recoverLogin]);
+    if (!user.username) recoverLogin();
+  }, [user.username, recoverLogin]);
 
   return (
     <>
-      {email ? (
+      {user.username ? (
         <WelcomeHeader
-          address={address}
-          email={email}
-          first_name={first_name}
-          last_name={last_name}
-          phone={phone}
+          user={user}
           logout={logout}
           updateUserDetails={updateUserDetails}
-          role={role}
         />
       ) : (
         <LoginHeader login={login} register={register} />
@@ -56,12 +39,7 @@ const LoginContainer = ({
 };
 
 const mapStateToProps = (state) => ({
-  email: getEmail(state),
-  first_name: getFirstName(state),
-  last_name: getLastName(state),
-  address: getAddress(state),
-  phone: getPhone(state),
-  role: getRole(state),
+  user: getUser(state),
 });
 
 const mapDispatchToProps = {

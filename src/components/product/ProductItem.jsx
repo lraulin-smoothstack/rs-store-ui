@@ -23,16 +23,16 @@ const ProductItem = ({ product, onAddToCartClicked }) => (
   </div>
 );
 
-ProductItem.propTypes = {
-  product: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    photo_url: PropTypes.string.isRequired,
-    retail_price_cents: PropTypes.number.isRequired,
-    stock: PropTypes.number.isRequired,
-  }).isRequired,
-  onAddToCartClicked: PropTypes.func.isRequired,
-};
+// ProductItem.propTypes = {
+//   product: PropTypes.shape({
+//     id: PropTypes.number.isRequired,
+//     name: PropTypes.string.isRequired,
+//     description: PropTypes.string.isRequired,
+//     photo_url: PropTypes.string.isRequired,
+//     retail_price_cents: PropTypes.number.isRequired,
+//     stock: PropTypes.number.isRequired,
+//   }).isRequired,
+//   onAddToCartClicked: PropTypes.func.isRequired,
+// };
 
 export default ProductItem;

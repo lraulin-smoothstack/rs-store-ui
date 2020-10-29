@@ -32,13 +32,13 @@ const Product = ({
   );
 };
 
-Product.propTypes = {
-  id: PropTypes.number,
-  name: PropTypes.string,
-  description: PropTypes.string,
-  photo_url: PropTypes.string,
-  retail_price_cents: PropTypes.number,
-  stock: PropTypes.number,
-};
+// Product.propTypes = {
+//   id: PropTypes.number,
+//   name: PropTypes.string,
+//   description: PropTypes.string,
+//   photo_url: PropTypes.string,
+//   retail_price_cents: PropTypes.number,
+//   stock: PropTypes.number,
+// };
 
 export default Product;

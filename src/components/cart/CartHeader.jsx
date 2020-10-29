@@ -5,6 +5,7 @@ import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { Badge } from "react-bootstrap";
 import Cart from "./Cart";
 import CartItem from "./CartItem";
+import { Link } from "react-router-dom";
 
 const CartHeader = ({
   products,
@@ -20,14 +21,14 @@ const CartHeader = ({
       trigger="click"
       placement="bottom"
       overlay={
-        <Popover id="signinPopover">
+        <Popover id="cartPopover">
           <Popover.Content>
             <Cart
               hasProducts={Array.isArray(products) && products.length > 0}
               total={total}
               onCheckoutClicked={onCheckoutClicked}
             >
-              {products.map(product => (
+              {products.map((product) => (
                 <CartItem
                   id={product.id}
                   name={product.name}
@@ -39,6 +40,9 @@ const CartHeader = ({
                 />
               ))}
             </Cart>
+            <Link to="/checkout">
+              <Button>Checkout</Button>
+            </Link>
           </Popover.Content>
         </Popover>
       }

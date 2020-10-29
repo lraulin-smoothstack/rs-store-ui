@@ -1,23 +1,45 @@
 import React, { useState } from "react";
 import { Modal, Button, Form, Col } from "react-bootstrap";
+import { states } from "../../constants.js";
 
-const AccountModal = ({
-  email,
-  first_name,
-  last_name,
-  address,
-  phone,
-  updateUserDetails,
-}) => {
+const AccountModal = ({ user, updateUserDetails }) => {
   const [show, setShow] = useState(false);
   const [validated, _] = useState(false);
-  const [newFirstName, setNewFirstName] = useState(first_name || "");
-  const [newLastName, setNewLastName] = useState(last_name || "");
-  const [newAddress, setNewAddress] = useState(address || "");
-  const [newPhone, setNewPhone] = useState(phone || "");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const [userData, setUserData] = useState({
+    username: user && user.username ? user.username : "",
+    phone: user && user.phone ? user.phone : "",
+    firstName: user && user.firstName ? user.firstName : "",
+    lastName: user && user.lastName ? user.lastName : "",
+    address:
+      user && user.address
+        ? {
+            street: user.address.street || "",
+            city: user.address.city || "",
+            state: user.address.state || "",
+            zip: user.address.zip || "",
+          }
+        : { street: "", city: "", state: "", zip: "" },
+  });
+  const handleInputChange = (e) => {
+    setUserData({
+      ...userData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleAddressChange = (e) => {
+    setUserData({
+      ...userData,
+      address: {
+        ...userData.address,
+        [e.target.name]: e.target.value,
+      },
+    });
+  };
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
@@ -28,13 +50,7 @@ const AccountModal = ({
 
     event.preventDefault();
     event.stopPropagation();
-    updateUserDetails({
-      email,
-      first_name: newFirstName,
-      last_name: newLastName,
-      address: newAddress,
-      phone: newPhone,
-    });
+    updateUserDetails({ ...user, ...userData });
     handleClose();
   };
 
@@ -51,49 +67,90 @@ const AccountModal = ({
         <Modal.Body>
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Form.Row>
-              <Form.Group as={Col} md="4" controlId="validationCustom01">
-                <Form.Label>Email address</Form.Label>
+              <Form.Group as={Col} md="4" controlId="usernameFG">
+                <Form.Label>username address</Form.Label>
                 <Form.Control
-                  type="email"
-                  placeholder="Enter email"
-                  value={email}
+                  type="username"
+                  name="username"
+                  placeholder="Enter username"
+                  value={userData.username}
                   readOnly
                 />
               </Form.Group>
-              <Form.Group as={Col} md="4" controlId="validationCustom02">
+              <Form.Group as={Col} md="4" controlId="firstNameFG">
                 <Form.Label>First Name</Form.Label>
                 <Form.Control
                   type="text"
+                  name="firstName"
                   placeholder="Enter first name"
-                  value={newFirstName}
-                  onChange={(e) => setNewFirstName(e.target.value)}
+                  value={userData.firstName}
+                  onChange={handleInputChange}
                 />
               </Form.Group>
-              <Form.Group as={Col} md="4" controlId="validationCustom03">
+              <Form.Group as={Col} md="4" controlId="lastNameFG">
                 <Form.Label>Last Name</Form.Label>
                 <Form.Control
                   type="text"
+                  name="lastName"
                   placeholder="Enter last name"
-                  value={newLastName}
-                  onChange={(e) => setNewLastName(e.target.value)}
+                  value={userData.lastName}
+                  onChange={handleInputChange}
                 />
               </Form.Group>
-              <Form.Group as={Col} md="4" controlId="validationCustom04">
-                <Form.Label>Address</Form.Label>
+              <Form.Group as={Col} md="4" controlId="streetFG">
+                <Form.Label>Street</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Enter email"
-                  value={newAddress}
-                  onChange={(e) => setNewAddress(e.target.value)}
+                  placeholder="Enter street"
+                  name="street"
+                  value={userData.address.street}
+                  onChange={handleAddressChange}
                 />
               </Form.Group>
-              <Form.Group as={Col} md="4" controlId="validationCustom05">
+              <Form.Group as={Col} md="4" controlId="cityFG">
+                <Form.Label>City</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter city"
+                  name="city"
+                  value={userData.address.city}
+                  onChange={handleAddressChange}
+                />
+              </Form.Group>
+              <Form.Group as={Col} md="4" controlId="stateFG">
+                <Form.Label>State</Form.Label>
+                <Form.Control
+                  as="select"
+                  name="state"
+                  value={userData.address.state}
+                  onChange={handleAddressChange}
+                >
+                  <option value={""}>Select Your State</option>
+                  {Object.entries(states).map(([abbreviation, state]) => (
+                    <option value={abbreviation} key={abbreviation}>
+                      {state}
+                    </option>
+                  ))}
+                </Form.Control>
+              </Form.Group>
+              <Form.Group as={Col} md="4" controlId="zipFG">
+                <Form.Label>State</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter zip"
+                  name="zip"
+                  value={userData.address.zip}
+                  onChange={handleAddressChange}
+                />
+              </Form.Group>
+              <Form.Group as={Col} md="4" controlId="phoneFG">
                 <Form.Label>Phone</Form.Label>
                 <Form.Control
                   type="tel"
                   placeholder="Enter phone number"
-                  value={newPhone}
-                  onChange={(e) => setNewPhone(e.target.value)}
+                  name="phone"
+                  value={userData.phone}
+                  onChange={handleInputChange}
                 />
               </Form.Group>
             </Form.Row>

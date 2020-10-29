@@ -75,32 +75,35 @@ export default {
       });
     }
   },
-  login: async ({ email, password }) => {
+  login: async ({ username, password }) => {
     try {
-      const res = await post(API_URL + "/users/login", {
-        username: email,
+      const resBody = await post(API_URL + "/users/login", {
+        username,
         password,
       });
-      return { email, jwt: res.token };
+      console.log("SHOP LOGIN");
+      console.log(resBody);
+      if (resBody.success) {
+        const { user, token } = resBody;
+        return { user, token };
+      }
     } catch (e) {
       console.log(e);
     }
   },
-  register: async ({ email, password }) => {
+  register: async ({ username, password }) => {
     return await post(API_URL + "/users/register", {
-      username: email,
+      username: username,
       password,
     });
   },
-  updateUser: async ({ id, email, jwt }) => {
+  updateUser: async (user) => {
     console.log("updateUser API call");
-    console.log(id + " " + email + " " + jwt);
+    console.log("USER: " + user._id + " " + user.username);
     try {
-      const url = `${API_URL}/users/${id}`;
-      const body = {
-        username: email,
-      };
-      return await putWithToken(url, body, jwt);
+      const url = `${API_URL}/users/${user._id}`;
+      const resBody = await putWithToken(url, user, user.token);
+      return resBody;
     } catch (e) {
       console.log(e);
     }

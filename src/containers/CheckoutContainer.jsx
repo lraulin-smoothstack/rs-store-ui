@@ -7,12 +7,14 @@ import {
   getCartProducts,
   getTotalItems,
   getQuantityById,
+  getUser,
 } from "../reducers";
 import Checkout from "../components/cart/Checkout";
 import Payment from "../components/cart/Payment";
 import Address from "../components/cart/Address";
 
 const CheckoutContainer = ({
+  user,
   products,
   total,
   checkout,
@@ -32,7 +34,7 @@ const CheckoutContainer = ({
         removeItem={removeItem}
         updateQuantity={updateQuantity}
       />
-      <Address />
+      <Address address={user.address} />
       <Payment />
     </div>
   );
@@ -57,6 +59,7 @@ const mapStateToProps = (state) => ({
   products: getCartProducts(state),
   total: getTotal(state),
   totalItems: getTotalItems(state),
+  user: getUser(state),
   getQuantityById: getQuantityById(state),
 });
 

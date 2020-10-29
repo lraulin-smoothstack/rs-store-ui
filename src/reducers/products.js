@@ -2,7 +2,7 @@ import {
   RECEIVE_PRODUCTS,
   SET_DEPARTMENT,
   SET_SEARCH_STRING,
-} from "../constants/ActionTypes";
+} from "../constants";
 
 // const products = (state, action) => {
 //   switch (action.type) {

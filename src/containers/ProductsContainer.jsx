@@ -8,7 +8,7 @@ import ProductsList from "../components/product/ProductsList";
 
 const ProductsContainer = ({ products, addToCart }) => (
   <ProductsList>
-    {products.map(product => (
+    {products.map((product) => (
       <ProductItem
         key={product.id}
         product={product}
@@ -18,21 +18,21 @@ const ProductsContainer = ({ products, addToCart }) => (
   </ProductsList>
 );
 
-ProductsContainer.propTypes = {
-  products: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      photo_url: PropTypes.string.isRequired,
-      retail_price_cents: PropTypes.number.isRequired,
-      stock: PropTypes.number.isRequired,
-    }),
-  ).isRequired,
-  addToCart: PropTypes.func.isRequired,
-};
+// ProductsContainer.propTypes = {
+//   products: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       id: PropTypes.number.isRequired,
+//       name: PropTypes.string.isRequired,
+//       description: PropTypes.string.isRequired,
+//       photo_url: PropTypes.string.isRequired,
+//       retail_price_cents: PropTypes.number.isRequired,
+//       stock: PropTypes.number.isRequired,
+//     }),
+//   ).isRequired,
+//   addToCart: PropTypes.func.isRequired,
+// };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   products: getVisibleProducts(state.products),
 });
 
